@@ -15,9 +15,13 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItem from "@material-ui/core/ListItem";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import SearchIcon from "@material-ui/icons/Search";
 import logo from "../public/logo.svg";
+import arrow from "../public/arrow.svg";
+import languageIcon from "../public/languageicon.png";
 import cssVars from "../constants/cssVars";
 
 const drawerWidth = 240;
@@ -58,6 +62,12 @@ const useStyles = makeStyles(theme => ({
     height: "30px",
     width: "50%"
   },
+  arrow: {
+    height: 15
+  },
+  langIcon: {
+    height: 30
+  },
   drawerPaper: {
     width: drawerWidth
   },
@@ -91,11 +101,6 @@ const useStyles = makeStyles(theme => ({
       display: "block"
     }
   },
-  desktopMenuItem: {
-    textTransform: "none",
-    color: cssVars.grey,
-    whiteSpace: "nowrap"
-  },
   search: {
     display: "none",
     [theme.breakpoints.up("md")]: {
@@ -109,7 +114,6 @@ const useStyles = makeStyles(theme => ({
     "&:hover": {
       backgroundColor: fade(theme.palette.common.white, 0.25)
     },
-    marginLeft: 0,
     width: "100%",
     [theme.breakpoints.up("sm")]: {
       marginLeft: theme.spacing(1),
@@ -139,13 +143,83 @@ const useStyles = makeStyles(theme => ({
         width: 300
       }
     }
+  },
+  currentLanguage: {
+    textTransform: "none",
+    color: cssVars.grey,
+    whiteSpace: "nowrap",
+    [theme.breakpoints.up("sm")]: {
+      display: "inline-block",
+      marginLeft: 4
+    }
+  },
+  mybtn: {
+    whiteSpace: "nowrap",
+    color: cssVars.grey,
+    fontFamily: "helvetica",
+    textDecoration: "none",
+    textDecoration: "none",
+    transition: "0.2s",
+    "&:hover": {
+      color: "#0ad0f4"
+    }
+  },
+  loginBtn: {
+    whiteSpace: "nowrap",
+    border: "1px solid transparent",
+    background: "none",
+    padding: "10px 30px",
+    fontSize: ".875rem",
+    borderRadius: ".25rem",
+    borderColor: cssVars.darkGrey,
+    color: cssVars.grey,
+    transition: "0.3s",
+    "&:hover": {
+      backgroundColor: "#0ad0f4",
+      color: "white"
+    },
+    cursor: "pointer"
+  },
+  loginBtnpadding: {
+    paddingLeft: 15
+  },
+  signupBtn: {
+    whiteSpace: "nowrap",
+    border: "1px solid transparent",
+    background: "#0ECE6D",
+    padding: "10px 30px",
+    fontSize: ".875rem",
+    borderRadius: ".25rem",
+    borderColor: "#0ECE6D",
+    color: "white",
+    transition: "0.3s",
+    "&:hover": {
+      backgroundColor: "#25aa68",
+      color: "white"
+    },
+    cursor: "pointer"
   }
 }));
 
 export default function Header() {
   const classes = useStyles();
   const theme = useTheme();
+  const [languageEn, setLanguageEn] = React.useState(true);
   const [open, setOpen] = React.useState(false);
+  const [languageAnchorEl, setLanguageAnchorEl] = React.useState(null);
+
+  const openLanguageDropdown = event => {
+    setLanguageAnchorEl(event.currentTarget);
+  };
+
+  const changeLanguage = () => {
+    setLanguageEn(!languageEn);
+    setLanguageAnchorEl(null);
+  };
+
+  const closeLanguageDropdown = () => {
+    setLanguageAnchorEl(null);
+  };
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -154,6 +228,7 @@ export default function Header() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+  const currentLanguage = languageEn ? "English" : "Hindi";
 
   return (
     <div className={classes.root}>
@@ -178,19 +253,29 @@ export default function Header() {
             <img src={logo} className={classes.img} alt="logo" />
           </Typography>
           <div className={classes.butpudding}>
-            <Button className={classes.desktopMenuItem}>Exams</Button>
+            <a href="#" className={classes.mybtn}>
+              Exams
+            </a>
           </div>
           <div className={classes.butpudding}>
-            <Button className={classes.desktopMenuItem}>Courses</Button>
+            <a href="#" className={classes.mybtn}>
+              Courses
+            </a>
           </div>
           <div className={classes.butpudding}>
-            <Button className={classes.desktopMenuItem}>Test Series</Button>
+            <a href="#" className={classes.mybtn}>
+              Test Series
+            </a>
           </div>
           <div className={classes.butpudding}>
-            <Button className={classes.desktopMenuItem}>Practice</Button>
+            <a href="#" className={classes.mybtn}>
+              Practice
+            </a>
           </div>
           <div className={classes.butpudding}>
-            <Button className={classes.desktopMenuItem}>Pass</Button>
+            <a href="#" className={classes.mybtn}>
+              Pass
+            </a>
           </div>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
@@ -204,6 +289,45 @@ export default function Header() {
               }}
               inputProps={{ "aria-label": "search" }}
             />
+          </div>
+          <div style={{ flexGrow: 1 }} />
+          <div className={classes.langPos}>
+            <Button
+              className={classes.dropBtn}
+              color="inherit"
+              aria-controls="simple-menu"
+              aria-haspopup="true"
+              aria-label="Change language"
+              onClick={openLanguageDropdown}
+            >
+              <img
+                src={languageIcon}
+                className={classes.langIcon}
+                alt="languageicon"
+              />
+              <span className={classes.currentLanguage}>{currentLanguage}</span>
+              <img src={arrow} className={classes.arrow} alt="arrow" />
+            </Button>
+            <Menu
+              id="simple-menu"
+              anchorEl={languageAnchorEl}
+              keepMounted
+              open={Boolean(languageAnchorEl)}
+              onClose={closeLanguageDropdown}
+            >
+              <MenuItem onClick={changeLanguage} selected={languageEn}>
+                English
+              </MenuItem>
+              <MenuItem onClick={changeLanguage} selected={!languageEn}>
+                Hindi
+              </MenuItem>
+            </Menu>
+          </div>
+          <div className={classes.loginBtnpadding}>
+            <button className={classes.loginBtn}>Login</button>
+          </div>
+          <div className={classes.loginBtnpadding}>
+            <button className={classes.signupBtn}>Sign up</button>
           </div>
         </Toolbar>
       </AppBar>
