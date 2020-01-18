@@ -60,7 +60,11 @@ const useStyles = makeStyles(theme => ({
   },
   img: {
     height: "30px",
-    width: "50%"
+    width: "50%",
+    display: "none",
+    [theme.breakpoints.up("md")]: {
+      display: "block"
+    }
   },
   arrow: {
     height: 15
@@ -178,7 +182,11 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: "#0ad0f4",
       color: "white"
     },
-    cursor: "pointer"
+    cursor: "pointer",
+    display: "none",
+    [theme.breakpoints.up("md")]: {
+      display: "block"
+    }
   },
   loginBtnpadding: {
     paddingLeft: 15
@@ -197,7 +205,11 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: "#25aa68",
       color: "white"
     },
-    cursor: "pointer"
+    cursor: "pointer",
+    display: "none",
+    [theme.breakpoints.up("md")]: {
+      display: "block"
+    }
   }
 }));
 
