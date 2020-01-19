@@ -59,12 +59,10 @@ const useStyles = makeStyles(theme => ({
     flexShrink: 0
   },
   img: {
-    height: "30px",
-    width: "50%",
-    display: "none",
-    [theme.breakpoints.up("md")]: {
-      display: "block"
-    }
+    height: 30,
+    width: 150,
+    paddingRight: 20,
+    marginTop: 7
   },
   arrow: {
     height: 15
@@ -99,7 +97,7 @@ const useStyles = makeStyles(theme => ({
     marginLeft: 0
   },
   butpudding: {
-    paddingRight: "50px",
+    paddingRight: 50,
     display: "none",
     [theme.breakpoints.up("md")]: {
       display: "block"
@@ -152,9 +150,9 @@ const useStyles = makeStyles(theme => ({
     textTransform: "none",
     color: cssVars.grey,
     whiteSpace: "nowrap",
+    display: "none",
     [theme.breakpoints.up("sm")]: {
-      display: "inline-block",
-      marginLeft: 4
+      display: "block"
     }
   },
   mybtn: {
@@ -182,14 +180,14 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: "#0ad0f4",
       color: "white"
     },
-    cursor: "pointer",
+    cursor: "pointer"
+  },
+  loginBtnpadding: {
+    paddingLeft: 15,
     display: "none",
     [theme.breakpoints.up("md")]: {
       display: "block"
     }
-  },
-  loginBtnpadding: {
-    paddingLeft: 15
   },
   signupBtn: {
     whiteSpace: "nowrap",
@@ -205,11 +203,7 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: "#25aa68",
       color: "white"
     },
-    cursor: "pointer",
-    display: "none",
-    [theme.breakpoints.up("md")]: {
-      display: "block"
-    }
+    cursor: "pointer"
   }
 }));
 
@@ -264,6 +258,7 @@ export default function Header() {
           <Typography variant="h6" noWrap>
             <img src={logo} className={classes.img} alt="logo" />
           </Typography>
+          <div style={{ flexGrow: 1 }} />
           <div className={classes.butpudding}>
             <a href="#" className={classes.mybtn}>
               Exams
