@@ -19,10 +19,12 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import SearchIcon from "@material-ui/icons/Search";
-import logo from "../public/logo.svg";
-import arrow from "../public/arrow.svg";
-import languageIcon from "../public/languageicon.png";
-import cssVars from "../constants/cssVars";
+import logo from "../../public/logo.svg";
+import arrow from "../../public/arrow.svg";
+import languageIcon from "../../public/languageicon.png";
+import { Link } from "react-router-dom";
+import { withRouter } from "react-router";
+import cssVars from "../../constants/cssVars";
 
 const drawerWidth = 240;
 
@@ -60,9 +62,7 @@ const useStyles = makeStyles(theme => ({
   },
   img: {
     height: 30,
-    width: 150,
-    paddingRight: 20,
-    marginTop: 7
+    width: 150
   },
   arrow: {
     height: 15
@@ -160,7 +160,6 @@ const useStyles = makeStyles(theme => ({
     color: cssVars.grey,
     fontFamily: "helvetica",
     textDecoration: "none",
-    textDecoration: "none",
     transition: "0.2s",
     "&:hover": {
       color: "#0ad0f4"
@@ -207,15 +206,26 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function Header() {
+function Header(props) {
+  const { history } = props;
   const classes = useStyles();
   const theme = useTheme();
   const [languageEn, setLanguageEn] = React.useState(true);
+  const [isIconDisplayed, setIsIconDisplayed] = React.useState(true);
   const [open, setOpen] = React.useState(false);
   const [languageAnchorEl, setLanguageAnchorEl] = React.useState(null);
 
   const openLanguageDropdown = event => {
     setLanguageAnchorEl(event.currentTarget);
+  };
+
+  const clickFunc = () => {
+    handleDrawerOpen();
+    check();
+  };
+
+  const check = () => {
+    setIsIconDisplayed(!isIconDisplayed);
   };
 
   const changeLanguage = () => {
@@ -232,8 +242,16 @@ export default function Header() {
   };
 
   const handleDrawerClose = () => {
+    setIsIconDisplayed(!isIconDisplayed);
     setOpen(false);
   };
+
+  const handleDoRoute = path => () => {
+    history.push(path);
+    setOpen(false);
+    setIsIconDisplayed(true);
+  };
+
   const currentLanguage = languageEn ? "English" : "Hindi";
 
   return (
@@ -249,40 +267,47 @@ export default function Header() {
           <IconButton
             color="inherit"
             aria-label="open drawer"
-            onClick={handleDrawerOpen}
+            onClick={clickFunc}
             edge="start"
             className={clsx(classes.menuButton, open && classes.hide)}
           >
-            <MenuIcon style={{ color: "black" }} />
+            <MenuIcon style={{ color: cssVars.grey }} />
           </IconButton>
           <Typography variant="h6" noWrap>
-            <img src={logo} className={classes.img} alt="logo" />
+            <Link to="/">
+              <img
+                src={logo}
+                style={{ display: isIconDisplayed ? "block" : "none" }}
+                className={classes.img}
+                alt="logo"
+              />
+            </Link>
           </Typography>
           <div style={{ flexGrow: 1 }} />
           <div className={classes.butpudding}>
-            <a href="#" className={classes.mybtn}>
+            <Link to="#" className={classes.mybtn}>
               Exams
-            </a>
+            </Link>
           </div>
           <div className={classes.butpudding}>
-            <a href="#" className={classes.mybtn}>
+            <Link to="#" className={classes.mybtn}>
               Courses
-            </a>
+            </Link>
           </div>
           <div className={classes.butpudding}>
-            <a href="#" className={classes.mybtn}>
+            <Link to="#" className={classes.mybtn}>
               Test Series
-            </a>
+            </Link>
           </div>
           <div className={classes.butpudding}>
-            <a href="#" className={classes.mybtn}>
+            <Link to="/practice" className={classes.mybtn}>
               Practice
-            </a>
+            </Link>
           </div>
           <div className={classes.butpudding}>
-            <a href="#" className={classes.mybtn}>
-              Pass
-            </a>
+            <Link to="/mock" className={classes.mybtn}>
+              Mock test
+            </Link>
           </div>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
@@ -348,6 +373,7 @@ export default function Header() {
         }}
       >
         <div className={classes.drawerHeader}>
+          <img src={logo} className={classes.img} alt="logo" />
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "ltr" ? (
               <ChevronLeftIcon />
@@ -358,13 +384,21 @@ export default function Header() {
         </div>
         <Divider />
         <List>
-          {["Exams", "Courses", "Test Series", "Practice", "Pass"].map(
-            (text, index) => (
-              <ListItem style={{ paddingLeft: 30 }} button key={text}>
-                <ListItemText style={{ color: cssVars.grey }} primary={text} />
-              </ListItem>
-            )
-          )}
+          {[
+            ["Exams", "#"],
+            ["Courses", "#"],
+            ["Test Series", "#"],
+            ["Practice", "/practice"],
+            ["Mock test", "/mock"]
+          ].map((el, index) => (
+            <ListItem style={{ paddingLeft: 30 }} button key={el[0]}>
+              <ListItemText
+                onClick={handleDoRoute(el[1])}
+                style={{ color: cssVars.grey }}
+                primary={el[0]}
+              />
+            </ListItem>
+          ))}
         </List>
       </Drawer>
       <main
@@ -377,3 +411,5 @@ export default function Header() {
     </div>
   );
 }
+
+export default withRouter(Header);
