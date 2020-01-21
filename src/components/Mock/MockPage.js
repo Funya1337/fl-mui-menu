@@ -18,82 +18,66 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import arrowIcon from "../../public/arrowicon.png";
 
-const drawerWidth = 240;
+const rightBlockWidth = 300;
 
 const useStyles = makeStyles(theme => ({
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: "center",
-    color: theme.palette.text.secondary
-  },
-  btnLine: {
-    backgroundColor: cssVars.greyYellow,
-    minWidth: "100%",
-    height: "70%",
-    position: "relative",
-    top: -47,
-    paddingLeft: 200,
-    flexDirection: "row",
-    [theme.breakpoints.up("md")]: {
-      display: "flex"
-    }
-  },
-  questClass: {
-    top: -37
-  },
-  leftArrow: {
-    width: 50,
-    height: 50
-  },
   root: {
-    display: "flex"
+    display: "flex",
+    flexDirection: "row",
+    marginTop: -47,
+    backgroundColor: "white"
   },
-  appBar: {
-    transition: theme.transitions.create(["margin", "width"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
-    })
-  },
-  appBarShift: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(["margin", "width"], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen
-    }),
-    marginRight: drawerWidth
-  },
-  title: {
+  left: {
     flexGrow: 1
   },
-  hide: {
-    display: "none"
+  right: {
+    backgroundColor: "#d9edf6",
+    boxShadow:
+      "-1px 0px 1px 1px rgba(0,0,0,0.2), 0px 0px 1px 1px rgba(0,0,0,0.14), 0px 0px 1px 1px rgba(0,0,0,0.12)",
+    padding: cssVars.gapM
   },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0
-  },
-  drawerPaper: {
-    width: drawerWidth
-  },
-  drawerHeader: {
+  leftRow1: {
+    paddingLeft: cssVars.gapM,
+    paddingRight: cssVars.gapM,
     display: "flex",
+    flexDirection: "row",
+    height: 50,
+    backgroundColor: "#f9f9f9",
     alignItems: "center",
-    padding: theme.spacing(0, 1),
-    ...theme.mixins.toolbar,
-    justifyContent: "flex-start"
+    boxShadow:
+      "0px 1px 2px -1px rgba(0,0,0,0.2), 0px 2px 3px 0px rgba(0,0,0,0.14), 0px 1px 2px 0px rgba(0,0,0,0.12)"
   },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-    transition: theme.transitions.create("margin", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
-    }),
-    marginRight: -drawerWidth
+  leftRow2: {
+    paddingLeft: cssVars.gapM,
+    paddingRight: cssVars.gapM,
+    marginTop: cssVars.gapS,
+    marginBottom: cssVars.gapS,
+    borderBottom: "1px solid lightgrey"
   },
-  contentShift: {
+  leftRow3: {
+    paddingLeft: cssVars.gapM,
+    paddingRight: cssVars.gapM,
+    minHeight: 500
+  },
+  rightRow1: {},
+  rightRow2: {},
+  rightRow3: {},
+  rightBlockHide: {
+    flexGrow: 0,
+    flexBasis: rightBlockWidth,
+    flexShrink: 1,
     transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.leavingScreen
+    }),
+    marginRight: -rightBlockWidth
+  },
+  rightBlockShow: {
+    flexGrow: 0,
+    flexBasis: rightBlockWidth,
+    flexShrink: 0,
+    transition: theme.transitions.create("margin", {
+      easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen
     }),
     marginRight: 0
@@ -103,76 +87,71 @@ const useStyles = makeStyles(theme => ({
 export default function MockPage() {
   const classes = useStyles();
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
+  const [rightBlockOpened, setRightBlockOpened] = React.useState(true);
+  console.log("rightBlockOpened", rightBlockOpened);
+  const handleDrawerToggle = () => {
+    setRightBlockOpened(!rightBlockOpened);
   };
 
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+  const rightBlockClasses = rightBlockOpened
+    ? `${classes.right} ${classes.rightBlockShow}`
+    : `${classes.right} ${classes.rightBlockHide}`;
+  console.log("rightBlockClasses", rightBlockClasses);
   return (
-    <div>
-      <div className={classes.btnLine}>
-        <ButtonMock text={"Sections"} />
-        <ButtonMock text={"General Intelligence &"} />
-        <ButtonMock text={"General Awareness"} />
-        <ButtonMock text={"Quantitative Aptitude"} />
-        <ButtonMock text={"English language"} />
-      </div>
-      <div className={classes.questClass}>
-        <h4>Question No. 1</h4>
-        <button onClick={handleDrawerOpen}>open drawer</button>
-      </div>
-      <hr />
-      <div className={classes.questionStyle}></div>
-      <div>
-        <div>
-          <Drawer
-            className={classes.drawer}
-            variant="persistent"
-            anchor="right"
-            open={open}
-            classes={{
-              paper: classes.drawerPaper
-            }}
-          >
-            <div className={classes.drawerHeader}>
-              <IconButton onClick={handleDrawerClose}>
-                {theme.direction === "rtl" ? (
-                  <ChevronLeftIcon />
-                ) : (
-                  <ChevronRightIcon />
-                )}
-              </IconButton>
-            </div>
-            <Divider />
-            <List>
-              {["Inbox", "Starred", "Send email", "Drafts"].map(
-                (text, index) => (
-                  <ListItem button key={text}>
-                    <ListItemIcon>
-                      {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                    </ListItemIcon>
-                    <ListItemText primary={text} />
-                  </ListItem>
-                )
-              )}
-            </List>
-            <Divider />
-            <List>
-              {["All mail", "Trash", "Spam"].map((text, index) => (
-                <ListItem button key={text}>
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItem>
-              ))}
-            </List>
-          </Drawer>
+    <div className={classes.root}>
+      <div className={classes.left}>
+        <div className={classes.leftRow1}>
+          <div style={{}}>
+            SECTIONS <span style={{ color: "lightgrey" }}>&nbsp;|</span>
+          </div>
+          <ButtonMock text={"General Intelligence"} isActive={true} />
+          <ButtonMock text={"General Awareness"} />
+          <ButtonMock text={"Quantitative Aptitude"} />
+          <ButtonMock text={"English language"} />
         </div>
+        <div className={classes.leftRow2}>
+          <div className={classes.questClass}>
+            <h4>Question No. 1</h4>
+          </div>
+        </div>
+        <div className={classes.leftRow3}>
+          <div>
+            In the following question, select the related word from the given
+            alternatives.
+          </div>
+          <div>Certainty: Contingency :: Cause : ? </div>
+          <p>
+            <div>
+              <input
+                type="radio"
+                name="imgsel"
+                value="Reason"
+                checked="checked"
+              />
+              Reason
+            </div>
+            <div>
+              <input type="radio" name="imgsel" value="Improbability" />
+              Improbability
+            </div>
+            <div>
+              <input type="radio" name="imgsel" value="Crisis" />
+              Crisis
+            </div>
+            <div>
+              <input type="radio" name="imgsel" value="Repercussion" />
+              Repercussion
+            </div>
+          </p>
+          <p>
+            <button onClick={handleDrawerToggle}>Toggle side bar</button>
+          </p>
+        </div>
+      </div>
+      <div className={rightBlockClasses}>
+        <div className={classes.rightRow1}>one</div>
+        <div className={classes.rightRow2}>two</div>
+        <div className={classes.rightRow3}>three</div>
       </div>
     </div>
   );

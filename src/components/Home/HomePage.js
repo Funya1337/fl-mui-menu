@@ -38,6 +38,65 @@ export default function HomePage() {
           <span class="dashboard-timer-animation"></span>
         </div>
       </div>
+      <Container fixed>
+        <p>
+          Itaque ducimus sunt itaque reprehenderit ullam veritatis perspiciatis
+          et. Laborum consequuntur aut accusantium sit quod necessitatibus.
+          Illum corrupti ipsam sed fugiat. Illo veritatis repudiandae
+          repellendus dolores ducimus quod ex non. Non dolorem corporis atque
+          itaque. Dolor corporis autem sint facere quo dolor numquam. Libero
+          quam quia at omnis. At quam ut velit magnam dolores nihil earum porro.
+          Ratione quia occaecati ab voluptatem. Voluptatum expedita eligendi nam
+          iste est dolore. Facere dolorem earum delectus repudiandae. Nobis sit
+          veritatis inventore accusantium rerum. Et iusto doloribus non
+          voluptatem ducimus. Numquam quisquam labore nemo. Iusto autem omnis id
+          velit. Qui omnis voluptatem beatae quod. Quibusdam nulla consequatur
+          ipsa. Et sit quia odit quidem fugiat. Occaecati non quibusdam rerum
+          facere ipsam aliquam veritatis inventore. Blanditiis quaerat dolor
+          exercitationem et vero numquam tempora non. Dolor repellendus natus
+          rerum. Pariatur enim voluptates harum non officia earum sequi ut. Aut
+          sint saepe eum doloremque quam repellat. Voluptatem facere omnis qui
+          quos totam commodi.
+        </p>
+        <p>
+          Itaque ducimus sunt itaque reprehenderit ullam veritatis perspiciatis
+          et. Laborum consequuntur aut accusantium sit quod necessitatibus.
+          Illum corrupti ipsam sed fugiat. Illo veritatis repudiandae
+          repellendus dolores ducimus quod ex non. Non dolorem corporis atque
+          itaque. Dolor corporis autem sint facere quo dolor numquam. Libero
+          quam quia at omnis. At quam ut velit magnam dolores nihil earum porro.
+          Ratione quia occaecati ab voluptatem. Voluptatum expedita eligendi nam
+          iste est dolore. Facere dolorem earum delectus repudiandae. Nobis sit
+          veritatis inventore accusantium rerum. Et iusto doloribus non
+          voluptatem ducimus. Numquam quisquam labore nemo. Iusto autem omnis id
+          velit. Qui omnis voluptatem beatae quod. Quibusdam nulla consequatur
+          ipsa. Et sit quia odit quidem fugiat. Occaecati non quibusdam rerum
+          facere ipsam aliquam veritatis inventore. Blanditiis quaerat dolor
+          exercitationem et vero numquam tempora non. Dolor repellendus natus
+          rerum. Pariatur enim voluptates harum non officia earum sequi ut. Aut
+          sint saepe eum doloremque quam repellat. Voluptatem facere omnis qui
+          quos totam commodi.
+        </p>
+        <p>
+          Itaque ducimus sunt itaque reprehenderit ullam veritatis perspiciatis
+          et. Laborum consequuntur aut accusantium sit quod necessitatibus.
+          Illum corrupti ipsam sed fugiat. Illo veritatis repudiandae
+          repellendus dolores ducimus quod ex non. Non dolorem corporis atque
+          itaque. Dolor corporis autem sint facere quo dolor numquam. Libero
+          quam quia at omnis. At quam ut velit magnam dolores nihil earum porro.
+          Ratione quia occaecati ab voluptatem. Voluptatum expedita eligendi nam
+          iste est dolore. Facere dolorem earum delectus repudiandae. Nobis sit
+          veritatis inventore accusantium rerum. Et iusto doloribus non
+          voluptatem ducimus. Numquam quisquam labore nemo. Iusto autem omnis id
+          velit. Qui omnis voluptatem beatae quod. Quibusdam nulla consequatur
+          ipsa. Et sit quia odit quidem fugiat. Occaecati non quibusdam rerum
+          facere ipsam aliquam veritatis inventore. Blanditiis quaerat dolor
+          exercitationem et vero numquam tempora non. Dolor repellendus natus
+          rerum. Pariatur enim voluptates harum non officia earum sequi ut. Aut
+          sint saepe eum doloremque quam repellat. Voluptatem facere omnis qui
+          quos totam commodi.
+        </p>
+      </Container>
     </div>
   );
 }
