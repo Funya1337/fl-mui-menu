@@ -11,7 +11,17 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function ButtonMock(props) {
-  const { text, onClick, isActive } = props;
+  const {
+    text,
+    onClick,
+    isActive,
+    isTextStylesActive,
+    bottomButtonStyleMockActive,
+    bottomButtonStyleMockOtherActive,
+    fullScreenButtonActive,
+    style,
+    rootStyle
+  } = props;
   const classes = useStyles();
   const styles = isActive
     ? {
@@ -19,9 +29,41 @@ export default function ButtonMock(props) {
         color: cssVars.white
       }
     : {};
+  const textStyles = isTextStylesActive
+    ? {
+        textTransform: "none"
+      }
+    : {};
+  const bottomButtonStyleMock = bottomButtonStyleMockActive
+    ? {
+        backgroundColor: cssVars.lightBlue,
+        color: cssVars.black
+      }
+    : {};
+  const bottomButtonStyleMockOther = bottomButtonStyleMockOtherActive
+    ? {
+        backgroundColor: cssVars.lighterBlue,
+        color: cssVars.white
+      }
+    : {};
+  const fullScreenButton = fullScreenButtonActive
+    ? {
+        width: "100%"
+      }
+    : {};
   return (
-    <div className={classes.root}>
-      <Button onClick={onClick} style={{ ...styles }}>
+    <div className={classes.root} style={rootStyle}>
+      <Button
+        onClick={onClick}
+        style={{
+          ...styles,
+          ...textStyles,
+          ...bottomButtonStyleMock,
+          ...bottomButtonStyleMockOther,
+          ...fullScreenButton,
+          ...style
+        }}
+      >
         {text}
       </Button>
     </div>
@@ -31,5 +73,10 @@ export default function ButtonMock(props) {
 ButtonMock.propTypes = {
   text: Type.string,
   onClick: Type.func,
-  isActive: Type.bool
+  isActive: Type.bool,
+  isTextStylesActive: Type.bool,
+  bottomButtonStyleMockActive: Type.bool,
+  fullScreenButtonActive: Type.bool,
+  style: Type.object,
+  rootStyle: Type.object
 };
