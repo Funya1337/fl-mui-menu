@@ -2,24 +2,13 @@ import React from "react";
 import clsx from "clsx";
 import ButtonMock from "../../components/ButtonMock/ButtonMock";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
-import List from "@material-ui/core/List";
-import Drawer from "@material-ui/core/Drawer";
-import Divider from "@material-ui/core/Divider";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
 import cssVars from "../../constants/cssVars";
 import Avatar from "@material-ui/core/Avatar";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import arrowIcon from "../../public/arrowicon.png";
 import WarningIcon from "@material-ui/icons/Warning";
 import avatar from "../../public/avatar.jpg";
+import RightDrawer from "../RightDrawer/RightDrawer";
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
 const rightBlockWidth = 300;
 
@@ -31,17 +20,32 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: "white"
   },
   left: {
-    flexGrow: 1
+    zIndex: 10,
+    flexGrow: 1,
+    transition: theme.transitions.create("margin", {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen
+    }),
+    marginRight: -rightBlockWidth
+  },
+  leftShift: {
+    transition: theme.transitions.create("margin", {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen
+    }),
+    marginRight: 0
   },
   right: {
-    backgroundColor: "#d9edf6",
-    boxShadow:
-      "-1px 0px 1px 1px rgba(0,0,0,0.2), 0px 0px 1px 1px rgba(0,0,0,0.14), 0px 0px 1px 1px rgba(0,0,0,0.12)"
-    // padding: cssVars.gapM
+    width: rightBlockWidth,
+    flexShrink: 0
+  },
+  rightPaper: {
+    backgroundColor: cssVars.rightBlockColor,
+    border: "solid 2px rgba(0,0,0,0.12)",
+    marginTop: 66
   },
   leftRow1: {
     paddingLeft: cssVars.gapM,
-    paddingRight: cssVars.gapM,
     display: "flex",
     flexDirection: "row",
     height: 50,
@@ -106,26 +110,6 @@ const useStyles = makeStyles(theme => ({
   rightRow1: {},
   rightRow2: {},
   rightRow3: {},
-  rightBlockHide: {
-    flexGrow: 0,
-    flexBasis: rightBlockWidth,
-    flexShrink: 1,
-    transition: theme.transitions.create("margin", {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.leavingScreen
-    }),
-    marginRight: -rightBlockWidth
-  },
-  rightBlockShow: {
-    flexGrow: 0,
-    flexBasis: rightBlockWidth,
-    flexShrink: 0,
-    transition: theme.transitions.create("margin", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen
-    }),
-    marginRight: 0
-  },
   circle: {
     height: 20,
     width: 20,
@@ -169,22 +153,23 @@ const useStyles = makeStyles(theme => ({
       textAlign: "center",
       border: "solid 1px black"
     }
+  },
+  rightBlockArrow: {
+    fontSize: 30,
+    paddingTop: 4,
+    backgroundColor: cssVars.rightBlockColor,
+    border: "solid 2px rgba(0,0,0,0.12)",
+    cursor: "pointer"
   }
 }));
 
 export default function MockPage() {
   const classes = useStyles();
-  const theme = useTheme();
   const [rightBlockOpened, setRightBlockOpened] = React.useState(true);
   console.log("rightBlockOpened", rightBlockOpened);
   const handleDrawerToggle = () => {
     setRightBlockOpened(!rightBlockOpened);
   };
-
-  const rightBlockClasses = rightBlockOpened
-    ? `${classes.right} ${classes.rightBlockShow}`
-    : `${classes.right} ${classes.rightBlockHide}`;
-  console.log("rightBlockClasses", rightBlockClasses);
 
   const renderTasksTable = () => {
     let el = [...Array(5).keys()];
@@ -204,7 +189,7 @@ export default function MockPage() {
 
   return (
     <div className={classes.root}>
-      <div className={classes.left}>
+      <div className={clsx(classes.left, { [classes.leftShift]: rightBlockOpened })}>
         <div className={classes.leftRow1}>
           <div>
             SECTIONS <span style={{ color: "lightgrey" }}>&nbsp;|</span>
@@ -219,7 +204,10 @@ export default function MockPage() {
             text={"Quantitative Aptitude"}
             isTextStylesActive={true}
           />
-          <ButtonMock isTextStylesActive={true} text={"English language"} />
+          <ButtonMock isTextStylesActive={true} text={"English language"} rootStyle={{flexGrow: 1}}/>
+          <div className={classes.rightBlockArrow} onClick={handleDrawerToggle}>{
+            rightBlockOpened ? <ArrowForwardIcon/> : <ArrowBackIcon/>
+          }</div>
         </div>
         <div className={classes.leftRow2}>
           <div className={classes.leftRow2Flex}>
@@ -280,7 +268,7 @@ export default function MockPage() {
           />
         </div>
       </div>
-      <div className={rightBlockClasses}>
+      <RightDrawer open={rightBlockOpened} className={classes.right} variant="persistent" anchor="right" classes={{ paper: classes.rightPaper}}>
         <div className={classes.paddingForDrawer}>
           <div className={classes.drawerDivAvatar}>
             <Avatar alt="Remy Sharp" src={avatar} />
@@ -346,7 +334,7 @@ export default function MockPage() {
             />
           </div>
         </div>
-      </div>
+      </RightDrawer>
     </div>
   );
 }
