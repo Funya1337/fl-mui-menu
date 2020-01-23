@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import clsx from "clsx";
 import ButtonMock from "../../components/ButtonMock/ButtonMock";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
@@ -7,8 +7,8 @@ import Avatar from "@material-ui/core/Avatar";
 import WarningIcon from "@material-ui/icons/Warning";
 import avatar from "../../public/avatar.jpg";
 import RightDrawer from "../RightDrawer/RightDrawer";
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 
 const rightBlockWidth = 300;
 
@@ -160,12 +160,42 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: cssVars.rightBlockColor,
     border: "solid 2px rgba(0,0,0,0.12)",
     cursor: "pointer"
+  },
+  oval: {
+    height: 20,
+    width: 50,
+    backgroundColor: "green",
+    borderRadius: "50%",
+    textAlign: "center",
+    color: "white"
+  },
+  oval2: {
+    height: 20,
+    width: 50,
+    backgroundColor: "red",
+    borderRadius: "50%",
+    textAlign: "center",
+    color: "white"
   }
 }));
+
+const calculator = timerTime => {
+  let mins = Math.floor(timerTime / 60);
+  let sec = timerTime % 60;
+  if (timerTime < 10) {
+    sec = "0" + sec;
+  }
+  if (mins < 10) {
+    mins = "0" + mins;
+  }
+  const res = mins + ":" + sec;
+  return res;
+};
 
 export default function MockPage() {
   const classes = useStyles();
   const [rightBlockOpened, setRightBlockOpened] = React.useState(true);
+  const [timerTime, setTimerTime] = useState(0);
   console.log("rightBlockOpened", rightBlockOpened);
   const handleDrawerToggle = () => {
     setRightBlockOpened(!rightBlockOpened);
@@ -187,9 +217,18 @@ export default function MockPage() {
     return <div>{res}</div>;
   };
 
+  useEffect(() => {
+    const updateTimer = () => setTimerTime(timerTime + 1);
+    setTimeout(updateTimer, 1000);
+  }, [timerTime]);
+
   return (
     <div className={classes.root}>
-      <div className={clsx(classes.left, { [classes.leftShift]: rightBlockOpened })}>
+      <div
+        className={clsx(classes.left, {
+          [classes.leftShift]: rightBlockOpened
+        })}
+      >
         <div className={classes.leftRow1}>
           <div>
             SECTIONS <span style={{ color: "lightgrey" }}>&nbsp;|</span>
@@ -204,14 +243,34 @@ export default function MockPage() {
             text={"Quantitative Aptitude"}
             isTextStylesActive={true}
           />
-          <ButtonMock isTextStylesActive={true} text={"English language"} rootStyle={{flexGrow: 1}}/>
-          <div className={classes.rightBlockArrow} onClick={handleDrawerToggle}>{
-            rightBlockOpened ? <ArrowForwardIcon/> : <ArrowBackIcon/>
-          }</div>
+          <ButtonMock
+            isTextStylesActive={true}
+            text={"English language"}
+            rootStyle={{ flexGrow: 1 }}
+          />
+          <div className={classes.rightBlockArrow} onClick={handleDrawerToggle}>
+            {rightBlockOpened ? <ArrowForwardIcon /> : <ArrowBackIcon />}
+          </div>
         </div>
         <div className={classes.leftRow2}>
           <div className={classes.leftRow2Flex}>
             <h4 style={{ flexGrow: 1 }}>Question No. 1</h4>
+            <div>
+              <div>Marks</div>
+              <div>
+                <div className={classes.leftRow2Flex}>
+                  <div className={classes.oval}>+2</div>
+                  <div style={{ paddingLeft: 5 }} />
+                  <div className={classes.oval2}>-0.5</div>
+                </div>
+              </div>
+            </div>
+            <div style={{ paddingLeft: 15 }}>
+              <div style={{ paddingRight: 20 }}>Time</div>
+              <div>
+                <div style={{ paddingRight: 20 }}>{calculator(timerTime)}</div>
+              </div>
+            </div>
             <WarningIcon />
             <div style={{ paddingLeft: 5 }}>Report</div>
           </div>
@@ -224,12 +283,7 @@ export default function MockPage() {
           <div>Certainty: Contingency :: Cause : ? </div>
           <p>
             <div>
-              <input
-                type="radio"
-                name="imgsel"
-                value="Reason"
-                checked="checked"
-              />
+              <input type="radio" name="imgsel" value="Reason" />
               Reason
             </div>
             <div>
@@ -244,9 +298,6 @@ export default function MockPage() {
               <input type="radio" name="imgsel" value="Repercussion" />
               Repercussion
             </div>
-          </p>
-          <p>
-            <button onClick={handleDrawerToggle}>Toggle side bar</button>
           </p>
         </div>
         <div className={classes.leftRow4}>
@@ -268,7 +319,13 @@ export default function MockPage() {
           />
         </div>
       </div>
-      <RightDrawer open={rightBlockOpened} className={classes.right} variant="persistent" anchor="right" classes={{ paper: classes.rightPaper}}>
+      <RightDrawer
+        open={rightBlockOpened}
+        className={classes.right}
+        variant="persistent"
+        anchor="right"
+        classes={{ paper: classes.rightPaper }}
+      >
         <div className={classes.paddingForDrawer}>
           <div className={classes.drawerDivAvatar}>
             <Avatar alt="Remy Sharp" src={avatar} />
