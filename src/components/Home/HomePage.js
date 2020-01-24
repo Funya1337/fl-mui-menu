@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Typography } from "@material-ui/core";
+import { Container } from "@material-ui/core";
 
 export default function HomePage() {
   return (
@@ -19,6 +19,7 @@ export default function HomePage() {
                 className="mx-auto img-fluid"
                 src="https://blogmedia.testbook.com/blog/wp-content/uploads/2020/01/gdgs_course_home_fg-1-1-3b339a50.png"
                 style={{ width: "1410px", height: "310px" }}
+                alt="good"
               ></img>
             </a>
           </div>
@@ -34,8 +35,8 @@ export default function HomePage() {
               22:03:15
             </div>
           </div>
-          <span class="dashboard-timer-animation"></span>
-          <span class="dashboard-timer-animation"></span>
+          <span className="dashboard-timer-animation"></span>
+          <span className="dashboard-timer-animation"></span>
         </div>
       </div>
       <Container fixed>

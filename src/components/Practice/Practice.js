@@ -13,7 +13,6 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
-import Link from "@material-ui/core/Link";
 
 const tutorialSteps = [
   {
@@ -242,11 +241,11 @@ export default function Practice() {
               </div>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <a href="#" className={classes.mybtn}>
+              <a href="/#" className={classes.mybtn}>
                 TestBook app
               </a>
               <span className={classes.btnC}></span>
-              <a href="#" className={classes.mybtn}>
+              <a href="/#" className={classes.mybtn}>
                 Current affairs app
               </a>
               <h2>

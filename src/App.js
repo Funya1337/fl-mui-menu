@@ -20,13 +20,15 @@ function App() {
   return (
     <Router>
       <ThemeProvider theme={theme}>
-        <Header />
         <Switch>
           <Route exact path="/mock" component={MockPage} />
-          <Route exact path="/practice" component={Practice} />
-          <Route path="/" component={HomePage} />
+          <Route path="/">
+            <Header />
+            <Route exact path="/practice" component={Practice} />
+            <Route exact path="/" component={HomePage} />
+            <Footer />
+          </Route>
         </Switch>
-        <Footer />
       </ThemeProvider>
     </Router>
   );

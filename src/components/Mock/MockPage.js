@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import clsx from "clsx";
 import ButtonMock from "../../components/ButtonMock/ButtonMock";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import cssVars from "../../constants/cssVars";
 import Avatar from "@material-ui/core/Avatar";
 import WarningIcon from "@material-ui/icons/Warning";
@@ -10,13 +10,12 @@ import RightDrawer from "../RightDrawer/RightDrawer";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 
-const rightBlockWidth = 300;
+const rightBlockWidth = 320;
 
 const useStyles = makeStyles(theme => ({
   root: {
     display: "flex",
     flexDirection: "row",
-    marginTop: -47,
     backgroundColor: "white"
   },
   left: {
@@ -40,9 +39,9 @@ const useStyles = makeStyles(theme => ({
     flexShrink: 0
   },
   rightPaper: {
+    width: rightBlockWidth,
     backgroundColor: cssVars.rightBlockColor,
-    border: "solid 2px rgba(0,0,0,0.12)",
-    marginTop: 66
+    border: "solid 2px rgba(0,0,0,0.12)"
   },
   leftRow1: {
     paddingLeft: cssVars.gapM,
@@ -95,14 +94,13 @@ const useStyles = makeStyles(theme => ({
   leftRow2: {
     paddingLeft: cssVars.gapM,
     paddingRight: cssVars.gapM,
-    marginTop: cssVars.gapS,
     marginBottom: cssVars.gapS,
     borderBottom: "1px solid lightgrey"
   },
   leftRow3: {
     paddingLeft: cssVars.gapM,
     paddingRight: cssVars.gapM,
-    minHeight: 500
+    minHeight: "calc(100vh - 172px)"
   },
   paddingForDrawer: {
     padding: cssVars.gapM
@@ -151,7 +149,9 @@ const useStyles = makeStyles(theme => ({
       width: 39,
       backgroundColor: "white",
       textAlign: "center",
-      border: "solid 1px black"
+      border: "solid 1px black",
+      cursor: "pointer",
+      paddingTop: 3
     }
   },
   rightBlockArrow: {
@@ -163,17 +163,17 @@ const useStyles = makeStyles(theme => ({
   },
   oval: {
     height: 20,
-    width: 50,
+    width: 44,
     backgroundColor: "green",
-    borderRadius: "50%",
+    borderRadius: "40%",
     textAlign: "center",
     color: "white"
   },
   oval2: {
     height: 20,
-    width: 50,
+    width: 44,
     backgroundColor: "red",
-    borderRadius: "50%",
+    borderRadius: "40%",
     textAlign: "center",
     color: "white"
   }
@@ -182,7 +182,7 @@ const useStyles = makeStyles(theme => ({
 const calculator = timerTime => {
   let mins = Math.floor(timerTime / 60);
   let sec = timerTime % 60;
-  if (timerTime < 10) {
+  if (sec < 10) {
     sec = "0" + sec;
   }
   if (mins < 10) {
@@ -196,7 +196,6 @@ export default function MockPage() {
   const classes = useStyles();
   const [rightBlockOpened, setRightBlockOpened] = React.useState(true);
   const [timerTime, setTimerTime] = useState(0);
-  console.log("rightBlockOpened", rightBlockOpened);
   const handleDrawerToggle = () => {
     setRightBlockOpened(!rightBlockOpened);
   };
@@ -204,14 +203,14 @@ export default function MockPage() {
   const renderTasksTable = () => {
     let el = [...Array(5).keys()];
     const res = el.map((_el, index) => (
-      <div className={classes.levelRow}>
-        <div style={{ borderRadius: index === 0 ? "40%" : 0 }}>
+      <div className={classes.levelRow} key={index}>
+        <div style={{ borderRadius: index === 0 ? "40%" : 0 }} key={0}>
           {1 + index * 5}
         </div>
-        <div>{2 + index * 5}</div>
-        <div>{3 + index * 5}</div>
-        <div>{4 + index * 5}</div>
-        <div>{5 + index * 5}</div>
+        <div key={1}>{2 + index * 5}</div>
+        <div key={2}>{3 + index * 5}</div>
+        <div key={3}>{4 + index * 5}</div>
+        <div key={4}>{5 + index * 5}</div>
       </div>
     ));
     return <div>{res}</div>;
@@ -256,7 +255,7 @@ export default function MockPage() {
           <div className={classes.leftRow2Flex}>
             <h4 style={{ flexGrow: 1 }}>Question No. 1</h4>
             <div>
-              <div>Marks</div>
+              <div style={{ textAlign: "center", marginBottom: 3 }}>Marks</div>
               <div>
                 <div className={classes.leftRow2Flex}>
                   <div className={classes.oval}>+2</div>
@@ -266,10 +265,8 @@ export default function MockPage() {
               </div>
             </div>
             <div style={{ paddingLeft: 15 }}>
-              <div style={{ paddingRight: 20 }}>Time</div>
-              <div>
-                <div style={{ paddingRight: 20 }}>{calculator(timerTime)}</div>
-              </div>
+              <div style={{ paddingRight: 20, marginBottom: 3 }}>Time</div>
+              <div style={{ paddingRight: 20 }}>{calculator(timerTime)}</div>
             </div>
             <WarningIcon />
             <div style={{ paddingLeft: 5 }}>Report</div>
@@ -281,7 +278,8 @@ export default function MockPage() {
             alternatives.
           </div>
           <div>Certainty: Contingency :: Cause : ? </div>
-          <p>
+          <br />
+          <div>
             <div>
               <input type="radio" name="imgsel" value="Reason" />
               Reason
@@ -298,10 +296,11 @@ export default function MockPage() {
               <input type="radio" name="imgsel" value="Repercussion" />
               Repercussion
             </div>
-          </p>
+          </div>
         </div>
         <div className={classes.leftRow4}>
           <ButtonMock
+            rootStyle={{ marginLeft: 0 }}
             text="Mark for Review & Next"
             bottomButtonStyleMockActive={true}
             isTextStylesActive={true}
@@ -360,9 +359,9 @@ export default function MockPage() {
         </div>
         <div style={{ paddingBottom: 30 }} />
         <div className={classes.blueLineStyle}>
-          <strong style={{ paddingRight: 2, paddingLeft: 10 }}>SECTION</strong>
-          <strong style={{ paddingRight: 2 }}>:</strong>
-          <p> General Intelligence & Reason...</p>
+          <strong style={{ paddingRight: 2, paddingLeft: 20 }}>SECTION</strong>
+          <strong style={{ paddingRight: 2 }}>:&nbsp;</strong>
+          <p>General Intelligence</p>
         </div>
         <div className={classes.paddingForDrawer}>
           {renderTasksTable()}
@@ -371,12 +370,20 @@ export default function MockPage() {
             <br />
             <div className={classes.drawerDivDownButtons}>
               <ButtonMock
+                rootStyle={{
+                  flexBasis: 100,
+                  flexGrow: 1,
+                  flexShrink: 0,
+                  marginLeft: 0
+                }}
+                style={{ width: "100%" }}
                 text="Clear Response"
                 bottomButtonStyleMockActive={true}
                 isTextStylesActive={true}
               />
               <ButtonMock
-                style={{ width: 114 }}
+                rootStyle={{ flexBasis: 100, flexGrow: 1, flexShrink: 0 }}
+                style={{ width: "100%" }}
                 text="Instructions"
                 bottomButtonStyleMockActive={true}
                 isTextStylesActive={true}
@@ -384,6 +391,7 @@ export default function MockPage() {
             </div>
             <div style={{ paddingBottom: 10 }} />
             <ButtonMock
+              rootStyle={{ marginLeft: 0 }}
               text="Submit Test"
               bottomButtonStyleMockOtherActive={true}
               isTextStylesActive={true}
