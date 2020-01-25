@@ -1,213 +1,212 @@
-import React from "react";
-import clsx from "clsx";
-import { fade, makeStyles, useTheme } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Button from "@material-ui/core/Button";
-import List from "@material-ui/core/List";
-import InputBase from "@material-ui/core/InputBase";
-import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import ListItem from "@material-ui/core/ListItem";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import SearchIcon from "@material-ui/icons/Search";
-import logo from "../../public/logo.svg";
-import arrow from "../../public/arrow.svg";
-import languageIcon from "../../public/languageicon.png";
-import { Link } from "react-router-dom";
-import { withRouter } from "react-router";
-import cssVars from "../../constants/cssVars";
+import React from 'react';
+import clsx from 'clsx';
+import {fade, makeStyles, useTheme} from '@material-ui/core/styles';
+import Drawer from '@material-ui/core/Drawer';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Button from '@material-ui/core/Button';
+import List from '@material-ui/core/List';
+import InputBase from '@material-ui/core/InputBase';
+import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import ListItem from '@material-ui/core/ListItem';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import SearchIcon from '@material-ui/icons/Search';
+import logo from '../../public/logo.svg';
+import arrow from '../../public/arrow.svg';
+import languageIcon from '../../public/languageicon.png';
+import {Link} from 'react-router-dom';
+import {withRouter} from 'react-router';
+import cssVars from '../../constants/cssVars';
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
   root: {
-    display: "flex"
+    display: 'flex',
   },
   appBar: {
-    transition: theme.transitions.create(["margin", "width"], {
+    transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
+      duration: theme.transitions.duration.leavingScreen,
     }),
-    backgroundColor: "white"
+    backgroundColor: 'white',
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: drawerWidth,
-    transition: theme.transitions.create(["margin", "width"], {
+    transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen
-    })
+      duration: theme.transitions.duration.enteringScreen,
+    }),
   },
   menuButton: {
     marginRight: theme.spacing(2),
-    [theme.breakpoints.up("md")]: {
-      display: "none"
-    }
+    [theme.breakpoints.up('md')]: {
+      display: 'none',
+    },
   },
   hide: {
-    display: "none"
+    display: 'none',
   },
   drawer: {
     width: drawerWidth,
-    flexShrink: 0
+    flexShrink: 0,
   },
   img: {
     height: 30,
-    width: 150
+    width: 150,
   },
   arrow: {
-    height: 15
+    height: 15,
   },
   langIcon: {
-    height: 30
+    height: 30,
   },
   drawerPaper: {
-    width: drawerWidth
+    width: drawerWidth,
   },
   drawerHeader: {
-    display: "flex",
-    alignItems: "center",
+    display: 'flex',
+    alignItems: 'center',
     padding: theme.spacing(0, 1),
     ...theme.mixins.toolbar,
-    justifyContent: "flex-end"
+    justifyContent: 'flex-end',
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3),
-    transition: theme.transitions.create("margin", {
+    transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
+      duration: theme.transitions.duration.leavingScreen,
     }),
-    marginLeft: -drawerWidth
+    marginLeft: -drawerWidth,
   },
   contentShift: {
-    transition: theme.transitions.create("margin", {
+    transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen
+      duration: theme.transitions.duration.enteringScreen,
     }),
-    marginLeft: 0
+    marginLeft: 0,
   },
   butpudding: {
     paddingRight: 50,
-    display: "none",
-    [theme.breakpoints.up("md")]: {
-      display: "block"
-    }
+    display: 'none',
+    [theme.breakpoints.up('md')]: {
+      display: 'block',
+    },
   },
   search: {
-    display: "none",
-    [theme.breakpoints.up("md")]: {
-      display: "block"
+    display: 'none',
+    [theme.breakpoints.up('md')]: {
+      display: 'block',
     },
-    position: "relative",
-    border: "solid 2px",
+    position: 'relative',
+    border: 'solid 2px',
     borderColor: cssVars.darkGrey,
     borderRadius: theme.shape.borderRadius,
     backgroundColor: fade(theme.palette.common.white, 0.15),
-    "&:hover": {
-      backgroundColor: fade(theme.palette.common.white, 0.25)
+    '&:hover': {
+      backgroundColor: fade(theme.palette.common.white, 0.25),
     },
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
       marginLeft: theme.spacing(1),
-      width: "auto"
-    }
+      width: 'auto',
+    },
   },
   searchIcon: {
     width: theme.spacing(7),
     color: cssVars.darkGrey,
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center"
+    height: '100%',
+    position: 'absolute',
+    pointerEvents: 'none',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   inputRoot: {
-    color: "inherit"
+    color: 'inherit',
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 7),
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
       width: 250,
-      "&:focus": {
-        width: 300
-      }
-    }
+      '&:focus': {
+        width: 300,
+      },
+    },
   },
   currentLanguage: {
-    textTransform: "none",
+    textTransform: 'none',
     color: cssVars.grey,
-    whiteSpace: "nowrap",
-    display: "none",
-    [theme.breakpoints.up("sm")]: {
-      display: "block"
-    }
+    whiteSpace: 'nowrap',
+    display: 'none',
+    [theme.breakpoints.up('sm')]: {
+      display: 'block',
+    },
   },
   mybtn: {
-    whiteSpace: "nowrap",
+    whiteSpace: 'nowrap',
     color: cssVars.grey,
-    fontFamily: "helvetica",
-    textDecoration: "none",
-    transition: "0.2s",
-    "&:hover": {
-      color: "#0ad0f4"
-    }
+    fontFamily: 'helvetica',
+    textDecoration: 'none',
+    transition: '0.2s',
+    '&:hover': {
+      color: '#0ad0f4',
+    },
   },
   loginBtn: {
-    whiteSpace: "nowrap",
-    border: "1px solid transparent",
-    background: "none",
-    padding: "10px 30px",
-    fontSize: ".875rem",
-    borderRadius: ".25rem",
+    whiteSpace: 'nowrap',
+    border: '1px solid transparent',
+    background: 'none',
+    padding: '10px 30px',
+    fontSize: '.875rem',
+    borderRadius: '.25rem',
     borderColor: cssVars.darkGrey,
     color: cssVars.grey,
-    transition: "0.3s",
-    "&:hover": {
-      backgroundColor: "#0ad0f4",
-      color: "white"
+    transition: '0.3s',
+    '&:hover': {
+      backgroundColor: '#0ad0f4',
+      color: 'white',
     },
-    cursor: "pointer"
+    cursor: 'pointer',
   },
   loginBtnpadding: {
     paddingLeft: 15,
-    display: "none",
-    [theme.breakpoints.up("md")]: {
-      display: "block"
-    }
+    display: 'none',
+    [theme.breakpoints.up('md')]: {
+      display: 'block',
+    },
   },
   signupBtn: {
-    whiteSpace: "nowrap",
-    border: "1px solid transparent",
-    background: "#0ECE6D",
-    padding: "10px 30px",
-    fontSize: ".875rem",
-    borderRadius: ".25rem",
-    borderColor: "#0ECE6D",
-    color: "white",
-    transition: "0.3s",
-    "&:hover": {
-      backgroundColor: "#25aa68",
-      color: "white"
+    whiteSpace: 'nowrap',
+    border: '1px solid transparent',
+    background: '#0ECE6D',
+    padding: '10px 30px',
+    fontSize: '.875rem',
+    borderRadius: '.25rem',
+    borderColor: '#0ECE6D',
+    color: 'white',
+    transition: '0.3s',
+    '&:hover': {
+      backgroundColor: '#25aa68',
+      color: 'white',
     },
-    cursor: "pointer"
-  }
+    cursor: 'pointer',
+  },
 }));
 
 function Header(props) {
-  const { history } = props;
+  const {history} = props;
   const classes = useStyles();
   const theme = useTheme();
   const [languageEn, setLanguageEn] = React.useState(true);
@@ -252,7 +251,7 @@ function Header(props) {
     setIsIconDisplayed(true);
   };
 
-  const currentLanguage = languageEn ? "English" : "Hindi";
+  const currentLanguage = languageEn ? 'English' : 'Hindi';
 
   return (
     <div className={classes.root}>
@@ -260,30 +259,28 @@ function Header(props) {
       <AppBar
         position="fixed"
         className={clsx(classes.appBar, {
-          [classes.appBarShift]: open
-        })}
-      >
+          [classes.appBarShift]: open,
+        })}>
         <Toolbar>
           <IconButton
             color="inherit"
             aria-label="open drawer"
             onClick={clickFunc}
             edge="start"
-            className={clsx(classes.menuButton, open && classes.hide)}
-          >
-            <MenuIcon style={{ color: cssVars.grey }} />
+            className={clsx(classes.menuButton, open && classes.hide)}>
+            <MenuIcon style={{color: cssVars.grey}} />
           </IconButton>
           <Typography variant="h6" noWrap>
             <Link to="/">
               <img
                 src={logo}
-                style={{ display: isIconDisplayed ? "block" : "none" }}
+                style={{display: isIconDisplayed ? 'block' : 'none'}}
                 className={classes.img}
                 alt="logo"
               />
             </Link>
           </Typography>
-          <div style={{ flexGrow: 1 }} />
+          <div style={{flexGrow: 1}} />
           <div className={classes.butpudding}>
             <Link to="#" className={classes.mybtn}>
               Exams
@@ -317,12 +314,12 @@ function Header(props) {
               placeholder="Search…"
               classes={{
                 root: classes.inputRoot,
-                input: classes.inputInput
+                input: classes.inputInput,
               }}
-              inputProps={{ "aria-label": "search" }}
+              inputProps={{'aria-label': 'search'}}
             />
           </div>
-          <div style={{ flexGrow: 1 }} />
+          <div style={{flexGrow: 1}} />
           <div className={classes.langPos}>
             <Button
               className={classes.dropBtn}
@@ -330,8 +327,7 @@ function Header(props) {
               aria-controls="simple-menu"
               aria-haspopup="true"
               aria-label="Change language"
-              onClick={openLanguageDropdown}
-            >
+              onClick={openLanguageDropdown}>
               <img
                 src={languageIcon}
                 className={classes.langIcon}
@@ -345,8 +341,7 @@ function Header(props) {
               anchorEl={languageAnchorEl}
               keepMounted
               open={Boolean(languageAnchorEl)}
-              onClose={closeLanguageDropdown}
-            >
+              onClose={closeLanguageDropdown}>
               <MenuItem onClick={changeLanguage} selected={languageEn}>
                 English
               </MenuItem>
@@ -369,13 +364,12 @@ function Header(props) {
         anchor="left"
         open={open}
         classes={{
-          paper: classes.drawerPaper
-        }}
-      >
+          paper: classes.drawerPaper,
+        }}>
         <div className={classes.drawerHeader}>
           <img src={logo} className={classes.img} alt="logo" />
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === "ltr" ? (
+            {theme.direction === 'ltr' ? (
               <ChevronLeftIcon />
             ) : (
               <ChevronRightIcon />
@@ -385,16 +379,16 @@ function Header(props) {
         <Divider />
         <List>
           {[
-            ["Exams", "#"],
-            ["Courses", "#"],
-            ["Test Series", "#"],
-            ["Practice", "/practice"],
-            ["Mock test", "/mock"]
+            ['Exams', '#'],
+            ['Courses', '#'],
+            ['Test Series', '#'],
+            ['Practice', '/practice'],
+            ['Mock test', '/mock'],
           ].map((el, index) => (
-            <ListItem style={{ paddingLeft: 30 }} button key={el[0]}>
+            <ListItem style={{paddingLeft: 30}} button key={el[0]}>
               <ListItemText
                 onClick={handleDoRoute(el[1])}
-                style={{ color: cssVars.grey }}
+                style={{color: cssVars.grey}}
                 primary={el[0]}
               />
             </ListItem>
@@ -403,9 +397,8 @@ function Header(props) {
       </Drawer>
       <main
         className={clsx(classes.content, {
-          [classes.contentShift]: open
-        })}
-      >
+          [classes.contentShift]: open,
+        })}>
         <div className={classes.drawerHeader} />
       </main>
     </div>

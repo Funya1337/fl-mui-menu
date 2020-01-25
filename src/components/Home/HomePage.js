@@ -1,103 +1,88 @@
-import React from "react";
-import { Container } from "@material-ui/core";
+import React from 'react';
+import {makeStyles, useTheme} from '@material-ui/core/styles';
+import {Container} from '@material-ui/core';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+
+const useStyles = makeStyles(theme => ({
+  container: {
+    padding: 20,
+    [theme.breakpoints.up('md')]: {
+      padding: 40,
+    },
+  },
+  imgClass1: {
+    backgroundImage:
+      'url(' +
+      'https://blogmedia.testbook.com/blog/wp-content/uploads/2020/01/ttp-4.0_home_bg-778e6f4c.jpg' +
+      ')',
+    width: '100%',
+    backgroundColor: '#31369A',
+  },
+  imgClass2: {
+    backgroundImage:
+      'url(' +
+      'https://blogmedia.testbook.com/blog/wp-content/uploads/2020/01/ssc-cgl-2020-crash-course-for-tier-i-1752x406-bg-1a1ba771.jpg' +
+      ')',
+    width: '100%',
+    backgroundColor: '#34540C',
+  },
+  imgClass3: {
+    backgroundImage:
+      'url(' +
+      'https://blogmedia.testbook.com/blog/wp-content/uploads/2020/01/drdo-mts-1752x406-bg-4afea793.png' +
+      ')',
+    width: '100%',
+    backgroundColor: '#23354F',
+  },
+  imgClass4: {
+    backgroundImage:
+      'url(' +
+      'https://blogmedia.testbook.com/blog/wp-content/uploads/2020/01/web_banner_homepage_1752-x-406_bg-fe428997.jpg' +
+      ')',
+    width: '100%',
+    backgroundColor: '#503c24',
+  },
+}));
 
 export default function HomePage() {
+  const classes = useStyles();
+  const theme = useTheme();
+  const settings = {
+    dots: true,
+    autoplay: true,
+    infinity: true,
+    speed: 500,
+  };
   return (
-    <div>
-      <div
-        className="promotions-banner pt-0 js-lazy-load-img ng-scope"
-        style={{
-          backgroundColor: "rgb(119, 7, 23)",
-          backgroundImage:
-            "url('https://blogmedia.testbook.com/blog/wp-content/uploads/2020/01/gdgs_course_home_bg-1-4363a229.jpg')"
-        }}
-      >
-        <div className="position-relative">
-          <div className="">
-            <a className="d-flex" href="/pass">
-              <img
-                className="mx-auto img-fluid"
-                src="https://blogmedia.testbook.com/blog/wp-content/uploads/2020/01/gdgs_course_home_fg-1-1-3b339a50.png"
-                style={{ width: "1410px", height: "310px" }}
-                alt="good"
-              ></img>
-            </a>
-          </div>
-          <div className="right-promo-timer">
-            <div style={{ color: "#EBF727", fontSize: "16px" }}>
-              Offer Ends In
-            </div>
-            <div
-              style={{ fontSize: "24px", lineHeight: 1 }}
-              className="js-promotional-offer-timer js- promotional-learn-pass-sold"
-              end-time="1579717799000"
-            >
-              22:03:15
-            </div>
-          </div>
-          <span className="dashboard-timer-animation"></span>
-          <span className="dashboard-timer-animation"></span>
+    <div className={classes.container}>
+      <Slider {...settings}>
+        <div>
+          <img
+            className={classes.imgClass1}
+            src="https://blogmedia.testbook.com/blog/wp-content/uploads/2020/01/ttp-4.0_home-35bb1884.png"
+          />
         </div>
-      </div>
-      <Container fixed>
-        <p>
-          Itaque ducimus sunt itaque reprehenderit ullam veritatis perspiciatis
-          et. Laborum consequuntur aut accusantium sit quod necessitatibus.
-          Illum corrupti ipsam sed fugiat. Illo veritatis repudiandae
-          repellendus dolores ducimus quod ex non. Non dolorem corporis atque
-          itaque. Dolor corporis autem sint facere quo dolor numquam. Libero
-          quam quia at omnis. At quam ut velit magnam dolores nihil earum porro.
-          Ratione quia occaecati ab voluptatem. Voluptatum expedita eligendi nam
-          iste est dolore. Facere dolorem earum delectus repudiandae. Nobis sit
-          veritatis inventore accusantium rerum. Et iusto doloribus non
-          voluptatem ducimus. Numquam quisquam labore nemo. Iusto autem omnis id
-          velit. Qui omnis voluptatem beatae quod. Quibusdam nulla consequatur
-          ipsa. Et sit quia odit quidem fugiat. Occaecati non quibusdam rerum
-          facere ipsam aliquam veritatis inventore. Blanditiis quaerat dolor
-          exercitationem et vero numquam tempora non. Dolor repellendus natus
-          rerum. Pariatur enim voluptates harum non officia earum sequi ut. Aut
-          sint saepe eum doloremque quam repellat. Voluptatem facere omnis qui
-          quos totam commodi.
-        </p>
-        <p>
-          Itaque ducimus sunt itaque reprehenderit ullam veritatis perspiciatis
-          et. Laborum consequuntur aut accusantium sit quod necessitatibus.
-          Illum corrupti ipsam sed fugiat. Illo veritatis repudiandae
-          repellendus dolores ducimus quod ex non. Non dolorem corporis atque
-          itaque. Dolor corporis autem sint facere quo dolor numquam. Libero
-          quam quia at omnis. At quam ut velit magnam dolores nihil earum porro.
-          Ratione quia occaecati ab voluptatem. Voluptatum expedita eligendi nam
-          iste est dolore. Facere dolorem earum delectus repudiandae. Nobis sit
-          veritatis inventore accusantium rerum. Et iusto doloribus non
-          voluptatem ducimus. Numquam quisquam labore nemo. Iusto autem omnis id
-          velit. Qui omnis voluptatem beatae quod. Quibusdam nulla consequatur
-          ipsa. Et sit quia odit quidem fugiat. Occaecati non quibusdam rerum
-          facere ipsam aliquam veritatis inventore. Blanditiis quaerat dolor
-          exercitationem et vero numquam tempora non. Dolor repellendus natus
-          rerum. Pariatur enim voluptates harum non officia earum sequi ut. Aut
-          sint saepe eum doloremque quam repellat. Voluptatem facere omnis qui
-          quos totam commodi.
-        </p>
-        <p>
-          Itaque ducimus sunt itaque reprehenderit ullam veritatis perspiciatis
-          et. Laborum consequuntur aut accusantium sit quod necessitatibus.
-          Illum corrupti ipsam sed fugiat. Illo veritatis repudiandae
-          repellendus dolores ducimus quod ex non. Non dolorem corporis atque
-          itaque. Dolor corporis autem sint facere quo dolor numquam. Libero
-          quam quia at omnis. At quam ut velit magnam dolores nihil earum porro.
-          Ratione quia occaecati ab voluptatem. Voluptatum expedita eligendi nam
-          iste est dolore. Facere dolorem earum delectus repudiandae. Nobis sit
-          veritatis inventore accusantium rerum. Et iusto doloribus non
-          voluptatem ducimus. Numquam quisquam labore nemo. Iusto autem omnis id
-          velit. Qui omnis voluptatem beatae quod. Quibusdam nulla consequatur
-          ipsa. Et sit quia odit quidem fugiat. Occaecati non quibusdam rerum
-          facere ipsam aliquam veritatis inventore. Blanditiis quaerat dolor
-          exercitationem et vero numquam tempora non. Dolor repellendus natus
-          rerum. Pariatur enim voluptates harum non officia earum sequi ut. Aut
-          sint saepe eum doloremque quam repellat. Voluptatem facere omnis qui
-          quos totam commodi.
-        </p>
-      </Container>
+        <div>
+          <img
+            className={classes.imgClass2}
+            src="https://blogmedia.testbook.com/blog/wp-content/uploads/2020/01/ssc-cgl-2020-crash-course-for-tier-i-1752x406-fg-281f148a.png"
+          />
+        </div>
+        <div>
+          <img
+            className={classes.imgClass3}
+            src="https://blogmedia.testbook.com/blog/wp-content/uploads/2020/01/drdo-mts-1752x406-fg-8b927788.png"
+          />
+        </div>
+        <div>
+          <img
+            className={classes.imgClass4}
+            src="https://blogmedia.testbook.com/blog/wp-content/uploads/2020/01/web_banner_homepage_1752-x-406_fg-cda09b0a.png"
+          />
+        </div>
+      </Slider>
     </div>
   );
 }

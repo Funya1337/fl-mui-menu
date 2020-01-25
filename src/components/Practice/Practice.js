@@ -1,134 +1,135 @@
-import React from "react";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import cssVars from "../../constants/cssVars";
-import Grid from "@material-ui/core/Grid";
-import { Container } from "@material-ui/core";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import bank from "../../public/bank.svg";
-import screen from "../../public/screen.png";
-import Button from "@material-ui/core/Button";
-import MobileStepper from "@material-ui/core/MobileStepper";
-import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
-import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
-import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
+import React from 'react';
+import {makeStyles, useTheme} from '@material-ui/core/styles';
+import cssVars from '../../constants/cssVars';
+import Grid from '@material-ui/core/Grid';
+import {Container} from '@material-ui/core';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import bank from '../../public/bank.svg';
+import screen from '../../public/screen.png';
+import Button from '@material-ui/core/Button';
+import MobileStepper from '@material-ui/core/MobileStepper';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
+import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 
 const tutorialSteps = [
   {
-    label: "Abhinav Gupta",
+    label: 'Abhinav Gupta',
     feedback:
-      "Testbook test series was the only one I had purchased for my Tier II Examination. The test series improved my speed to a great extent"
+      'Testbook test series was the only one I had purchased for my Tier II Examination. The test series improved my speed to a great extent',
   },
   {
-    label: "Pratibha Chaudhary",
+    label: 'Pratibha Chaudhary',
     feedback:
-      "I had attempted both, sectional as well as full length tests of Testbook. Test analysis aided me in self-evaluation, which was"
+      'I had attempted both, sectional as well as full length tests of Testbook. Test analysis aided me in self-evaluation, which was',
   },
   {
-    label: "Sunkara Venkata Tejaswi",
+    label: 'Sunkara Venkata Tejaswi',
     feedback:
-      "If you really want to crack any exam by enjoying your preparation then Testbook is the right choice. Tests are at par with the actual exam, plus the quality of questions"
+      'If you really want to crack any exam by enjoying your preparation then Testbook is the right choice. Tests are at par with the actual exam, plus the quality of questions',
   },
   {
-    label: "Sonia Devi",
+    label: 'Sonia Devi',
     feedback:
-      "From self evaluation to learning time management, TB's tests helped me in every aspect of exam preparation."
+      "From self evaluation to learning time management, TB's tests helped me in every aspect of exam preparation.",
   },
   {
-    label: "Subhadeep Patra",
+    label: 'Subhadeep Patra',
     feedback:
-      "Unaware of the methods to solve puzzles and maths, I started off with building up the basics through various books. But I came to know that one needs to practice online tests"
-  }
+      'Unaware of the methods to solve puzzles and maths, I started off with building up the basics through various books. But I came to know that one needs to practice online tests',
+  },
 ];
 
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   root1: {
     maxWidth: 400,
-    flexGrow: 1
+    flexGrow: 1,
   },
   header: {
-    display: "flex",
-    alignItems: "center",
+    display: 'flex',
+    alignItems: 'center',
     height: 50,
     paddingLeft: theme.spacing(4),
-    backgroundColor: theme.palette.background.default
+    backgroundColor: theme.palette.background.default,
   },
   img: {
     height: 255,
     maxWidth: 400,
-    overflow: "hidden",
-    display: "block",
-    width: "100%"
+    overflow: 'hidden',
+    display: 'block',
+    width: '100%',
   },
   paper: {
     padding: theme.spacing(2),
-    textAlign: "center",
-    color: theme.palette.text.secondary
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
   },
   title: {
-    lineHeight: "3rem",
-    textAlign: "center"
+    lineHeight: '3rem',
+    textAlign: 'center',
   },
   utitleStyle: {
-    fontSize: "6",
-    margin: "0 0 15",
-    lineHeight: "1.3125rem",
+    fontSize: '6',
+    margin: '0 0 15',
+    lineHeight: '1.3125rem',
     color: cssVars.grey,
-    textAlign: "center",
-    marginBottom: 50
+    textAlign: 'center',
+    marginBottom: 50,
   },
   card: {},
   bullet: {
-    display: "inline-block",
-    margin: "0 2px",
-    transform: "scale(0.8)"
+    display: 'inline-block',
+    margin: '0 2px',
+    transform: 'scale(0.8)',
   },
   pos: {
-    marginBottom: -60
+    marginBottom: -60,
   },
   bank: {
     height: 70,
-    width: 70
+    width: 70,
   },
   imgdiv: {
-    textAlign: "center"
+    textAlign: 'center',
   },
   screenClass: {
-    width: "100%",
-    height: "auto",
-    display: "block",
-    [theme.breakpoints.up("md")]: {
+    width: '100%',
+    height: 'auto',
+    display: 'block',
+
+    [theme.breakpoints.up('md')]: {
       height: 500,
       width: 600,
-      paddingLeft: 100
-    }
+      paddingLeft: 100,
+    },
   },
   spaceClass: {
-    paddingTop: 200
+    paddingTop: 200,
   },
   pStyle: {
-    color: cssVars.grey
+    color: cssVars.grey,
   },
   btnC: {
-    paddingRight: 10
+    paddingRight: 10,
   },
   mybtn: {
-    whiteSpace: "nowrap",
+    whiteSpace: 'nowrap',
     color: cssVars.grey,
-    fontFamily: "helvetica",
-    border: "1px solid black",
-    textDecoration: "none",
-    transition: "0.2s",
-    padding: "8px 18px",
-    "&:hover": {
-      color: "#0ad0f4",
-      border: "1px solid #0ad0f4"
-    }
-  }
+    fontFamily: 'helvetica',
+    border: '1px solid black',
+    textDecoration: 'none',
+    transition: '0.2s',
+    padding: '8px 18px',
+    '&:hover': {
+      color: '#0ad0f4',
+      border: '1px solid #0ad0f4',
+    },
+  },
 }));
 
 export default function Practice() {
@@ -272,13 +273,13 @@ export default function Practice() {
           <br />
           <div className={classes.root1}>
             <Paper square elevation={0} className={classes.header}>
-              <Typography style={{ color: cssVars.grey }}>
+              <Typography style={{color: cssVars.grey}}>
                 {tutorialSteps[activeStep].feedback}
               </Typography>
             </Paper>
             <br />
             <Paper square elevation={0} className={classes.header}>
-              <Typography style={{ fontWeight: "bold" }}>
+              <Typography style={{fontWeight: 'bold'}}>
                 {tutorialSteps[activeStep].label}
               </Typography>
             </Paper>
@@ -291,10 +292,9 @@ export default function Practice() {
                 <Button
                   size="small"
                   onClick={handleNext}
-                  disabled={activeStep === maxSteps - 1}
-                >
+                  disabled={activeStep === maxSteps - 1}>
                   Next
-                  {theme.direction === "rtl" ? (
+                  {theme.direction === 'rtl' ? (
                     <KeyboardArrowLeft />
                   ) : (
                     <KeyboardArrowRight />
@@ -305,9 +305,8 @@ export default function Practice() {
                 <Button
                   size="large"
                   onClick={handleBack}
-                  disabled={activeStep === 0}
-                >
-                  {theme.direction === "rtl" ? (
+                  disabled={activeStep === 0}>
+                  {theme.direction === 'rtl' ? (
                     <KeyboardArrowRight />
                   ) : (
                     <KeyboardArrowLeft />
