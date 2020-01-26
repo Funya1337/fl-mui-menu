@@ -1,19 +1,20 @@
-import React from "react";
-import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
-import purple from "@material-ui/core/colors/green";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import React from 'react';
+import {ThemeProvider, createMuiTheme} from '@material-ui/core/styles';
+import purple from '@material-ui/core/colors/green';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
-import Header from "./components/Header/Header";
-import Footer from "./components/Footer";
-import MockPage from "./components/Mock/MockPage";
-import HomePage from "./components/Home/HomePage";
-import Practice from "./components/Practice/Practice";
+import Header from './components/Header/Header';
+import Footer from './components/Footer';
+import MockPage from './components/Mock/MockPage';
+import HomePage from './components/Home/HomePage';
+import Practice from './components/Practice/Practice';
+import PracticeTest from './components/PracticeTest/PracticeTest';
 
 const theme = createMuiTheme({
   palette: {
     primary: purple,
-    type: "light"
-  }
+    type: 'light',
+  },
 });
 
 function App() {
@@ -22,6 +23,10 @@ function App() {
       <ThemeProvider theme={theme}>
         <Switch>
           <Route exact path="/mock" component={MockPage} />
+          <Route exact path="/practicetest">
+            <Header />
+            <PracticeTest />
+          </Route>
           <Route path="/">
             <Header />
             <Route exact path="/practice" component={Practice} />

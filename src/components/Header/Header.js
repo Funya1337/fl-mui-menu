@@ -292,8 +292,8 @@ function Header(props) {
             </Link>
           </div>
           <div className={classes.butpudding}>
-            <Link to="#" className={classes.mybtn}>
-              Test Series
+            <Link to="/practicetest" className={classes.mybtn}>
+              PracticeTest
             </Link>
           </div>
           <div className={classes.butpudding}>
