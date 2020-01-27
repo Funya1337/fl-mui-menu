@@ -1,6 +1,5 @@
 import React from "react";
 import clsx from "clsx";
-import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import List from "@material-ui/core/List";
@@ -35,244 +34,28 @@ import ReceiptIcon from "@material-ui/icons/Receipt";
 import TrackChangesIcon from "@material-ui/icons/TrackChanges";
 import FindInPageIcon from "@material-ui/icons/FindInPage";
 import SpeedIcon from "@material-ui/icons/Speed";
+import { MENU_STATE } from "../../constants/menuState";
+import { useTheme } from "@material-ui/core/styles";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { useStyles } from "./styles";
 
-const drawerWidth = 240;
-const useStyles = makeStyles(theme => ({
-  root1: {
-    padding: theme.spacing(3, 2)
-  },
-  search: {
-    position: "relative",
-    borderRadius: theme.shape.borderRadius,
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: theme.spacing(2),
-      width: "auto"
-    }
-  },
-  searchIcon: {
-    width: theme.spacing(7),
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  inputRoot: {
-    color: cssVars.darkGrey,
-    padding: 10
-  },
-  inputInput: {
-    padding: theme.spacing(1, 1, 1, 7),
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    border: "2px solid",
-    cursor: "pointer",
-    transition: "0.2s"
-  },
-  root: {
-    display: "flex"
-  },
-  menuButton: {
-    marginRight: theme.spacing(2)
-  },
-  hide: {
-    display: "none"
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0
-  },
-  drawerPaper: {
-    width: drawerWidth,
-    top: "inherit"
-  },
-  drawerHeader: {
-    display: "flex",
-    alignItems: "center",
-    padding: theme.spacing(0, 1),
-    justifyContent: "flex-end"
-  },
-  content: {
-    flexGrow: 1,
-    transition: theme.transitions.create("margin", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
-    }),
-    marginLeft: -drawerWidth
-  },
-  contentShift: {
-    transition: theme.transitions.create("margin", {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen
-    }),
-    marginLeft: 0
-  },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
-    fontWeight: theme.typography.fontWeightRegular
-  },
-  paperCustomButton: {
-    background: "none",
-    fontSize: 15,
-    paddingRight: 25,
-    fontFamily: "montserrat",
-    color: "black",
-    textDecoration: "none",
-    transition: "0.2s",
-    "&:hover": {
-      color: "#0ad0f4"
-    }
-  },
-  textOnImg: {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    whiteSpace: "nowrap",
-    transform: "translate(-50%, -50%)"
-  },
-  imgClass: {
-    position: "relative",
-    textAlign: "center",
-    color: "white"
-  },
-  textOnImgTop: {
-    position: "absolute",
-    top: "30%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    fontSize: "2vw",
-    fontWeight: "bold"
-  },
-  textOnImgBottomCenter: {
-    position: "absolute",
-    bottom: "20%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    fontSize: "1.2vw"
-  },
-  textOnImgBottomCenter1: {
-    position: "absolute",
-    bottom: "10%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    fontSize: "1vw"
-  },
-  textOnImgBottomRight: {
-    position: "absolute",
-    bottom: "20%",
-    left: "65%",
-    transform: "translate(-50%, -50%)",
-    fontSize: "1.2vw"
-  },
-  textOnImgBottomRight1: {
-    width: "100%",
-    position: "absolute",
-    bottom: "10%",
-    left: "65%",
-    transform: "translate(-50%, -50%)",
-    fontSize: "1vw"
-  },
-  textOnImgBottomLeft: {
-    position: "absolute",
-    bottom: "20%",
-    left: "35%",
-    transform: "translate(-50%, -50%)",
-    fontSize: "1.2vw"
-  },
-  textOnImgBottomLeft1: {
-    position: "absolute",
-    bottom: "10%",
-    left: "35%",
-    transform: "translate(-50%, -50%)",
-    fontSize: "1vw"
-  },
-  card: {},
-  media: {
-    height: 0,
-    paddingTop: "56.25%"
-  },
-  expand: {
-    transform: "rotate(0deg)",
-    marginLeft: "auto",
-    transition: theme.transitions.create("transform", {
-      duration: theme.transitions.duration.shortest
-    })
-  },
-  expandOpen: {
-    transform: "rotate(180deg)"
-  },
-  avatar: {
-    backgroundColor: red[500]
-  },
-  cardHeader: {
-    margin: "auto",
-    width: "fit-content",
-    "&>div>span": {
-      fontWeight: "bold",
-      fontSize: "large"
-    }
-  },
-  circleContainer: {
-    width: "100%",
-    marginTop: 20
-  },
-  circle: {
-    border: `5px solid ${cssVars.darkGrey}`,
-    borderRadius: "50%",
-    minHeight: 130,
-    minWidth: 130,
-    maxWidth: 170,
-    maxHeight: 170,
-    width: "13vw",
-    height: "13vw",
-    margin: "auto"
-  },
-  circleText: {
-    position: "relative",
-    marginTop: -120,
-    marginBottom: 120,
-    textAlign: "center",
-    "&>div:first-child": {
-      fontSize: 30
-    },
-    "&>div:last-child": {
-      fontSize: 15
-    }
-  },
-  cardGrid: {
-    width: "100%",
-    paddingLeft: 20,
-    paddingRight: 20,
-    paddingTop: 10,
-    paddingBottom: 10,
-    display: "flex",
-    backgroundColor: cssVars.white
-  },
-  cardGridGrey: {
-    backgroundColor: cssVars.darkDarkGrey
-  }
-}));
-
-export default function PracticeTest() {
+export default function PracticeTest(props) {
+  const { menuState, openSecondMenu, closeMenus } = props;
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
-  const [expanded, setExpanded] = React.useState(false);
+  const theme = useTheme();
+  const isDesktop = useMediaQuery(theme.breakpoints.up("lg"));
+  console.log("isDesktop", isDesktop);
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
+  console.log(123, props);
+
+  const handleToggleDrawer = () => {
+    if (menuState === MENU_STATE.SECOND_MENU_OPENED) {
+      closeMenus();
+    } else {
+      openSecondMenu();
+    }
   };
 
-  const handleDrawerOpen = () => {
-    setOpen(false);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(true);
-  };
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -280,7 +63,7 @@ export default function PracticeTest() {
         className={classes.drawer}
         variant="persistent"
         anchor="left"
-        open={open}
+        open={isDesktop || menuState === MENU_STATE.SECOND_MENU_OPENED}
         classes={{
           paper: classes.drawerPaper
         }}
@@ -425,13 +208,10 @@ export default function PracticeTest() {
           </ExpansionPanel>
         </List>
       </Drawer>
-      <main
-        className={clsx(classes.content, {
-          [classes.contentShift]: open
-        })}
-      >
+      <main className={classes.content}>
         <div className={classes.drawerHeader} />
         <Paper className={classes.root1}>
+          <button>asdfasdf</button>
           <Container fixed>
             <p style={{ color: cssVars.grey }}>Home</p>
             <Typography
@@ -493,8 +273,7 @@ export default function PracticeTest() {
               <div className={classes.textOnImgBottomLeft1}>Subjects</div>
             </div>
           </div>
-          <button onClick={handleDrawerClose}>open</button>
-          <button onClick={handleDrawerOpen}>close</button>
+          <button onClick={handleToggleDrawer}>Toggle Drawer</button>
           <h3>Overall Progress Status</h3>
           <div style={{ flexGrow: 1 }}>
             <Grid container spacing={3}>

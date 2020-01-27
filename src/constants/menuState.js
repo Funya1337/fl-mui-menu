@@ -1,0 +1,5 @@
+export const MENU_STATE = {
+  FIRST_MENU_OPENED: 1,
+  SECOND_MENU_OPENED: 2,
+  ALL_MENUS_CLOSED: 3
+};
