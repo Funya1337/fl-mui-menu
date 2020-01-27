@@ -38,18 +38,18 @@ import { MENU_STATE } from "../../constants/menuState";
 import { useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useStyles } from "./styles";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 
 export default function PracticeTest(props) {
   const { menuState, openSecondMenu, closeMenus } = props;
   const classes = useStyles();
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up("lg"));
-  console.log("isDesktop", isDesktop);
-
-  console.log(123, props);
+  const isMenuOpened = menuState === MENU_STATE.SECOND_MENU_OPENED;
 
   const handleToggleDrawer = () => {
-    if (menuState === MENU_STATE.SECOND_MENU_OPENED) {
+    if (isMenuOpened) {
       closeMenus();
     } else {
       openSecondMenu();
@@ -64,7 +64,7 @@ export default function PracticeTest(props) {
         className={classes.drawer}
         variant="persistent"
         anchor="left"
-        open={isDesktop || menuState === MENU_STATE.SECOND_MENU_OPENED}
+        open={isDesktop || isMenuOpened}
         classes={{
           paper: classes.drawerPaper
         }}
@@ -211,6 +211,24 @@ export default function PracticeTest(props) {
       </Drawer>
       <div className={classes.content}>
         <div className={classes.drawerHeader} />
+        <div
+          style={{
+            marginLeft: isMenuOpened ? 239 : 0,
+            paddingTop: 8,
+            paddingBottom: 6,
+            paddingLeft: 3,
+            marginTop: 6,
+            marginBottom: 6,
+            border: "solid 2px rgba(0,0,0,0.12)",
+            cursor: "pointer",
+            width: 36
+          }}
+          onClick={handleToggleDrawer}
+        >
+          <div style={{ display: isDesktop ? "none" : "block" }}>
+            {isMenuOpened ? <ArrowBackIcon /> : <ArrowForwardIcon />}
+          </div>
+        </div>
         <Paper className={classes.root1}>
           <Container fixed>
             <p style={{ color: cssVars.grey }}>Home</p>
@@ -244,8 +262,6 @@ export default function PracticeTest(props) {
           </Container>
         </Paper>
         <Container fixed>
-          <br />
-          <br />
           <div className={classes.imgClass}>
             <img
               src={banner}
@@ -287,12 +303,6 @@ export default function PracticeTest(props) {
               </div>
             </div>
           </div>
-          <button
-            style={{ display: isDesktop ? "none" : "block", float: "right" }}
-            onClick={handleToggleDrawer}
-          >
-            Toggle Drawer
-          </button>
           <h3>Overall Progress Status</h3>
           <div style={{ flexGrow: 1 }}>
             <Grid container spacing={3}>

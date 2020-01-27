@@ -63,6 +63,7 @@ export const useStyles = makeStyles(theme => ({
     justifyContent: "flex-end"
   },
   content: {
+    backgroundColor: cssVars.white,
     flexGrow: 1,
     transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.sharp,
@@ -97,6 +98,7 @@ export const useStyles = makeStyles(theme => ({
     transform: "translate(-50%, -50%)"
   },
   imgClass: {
+    marginTop: 26,
     position: "relative",
     textAlign: "center",
     color: "white"
@@ -185,10 +187,16 @@ export const useStyles = makeStyles(theme => ({
     marginBottom: 120,
     textAlign: "center",
     "&>div:first-child": {
-      fontSize: 30
+      fontSize: 30,
+      [theme.breakpoints.down("sm")]: {
+        fontSize: 24
+      }
     },
     "&>div:last-child": {
       fontSize: 15
+    },
+    [theme.breakpoints.down("sm")]: {
+      marginTop: -100
     }
   },
   cardGrid: {
