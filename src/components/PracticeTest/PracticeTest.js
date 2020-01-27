@@ -60,6 +60,7 @@ export default function PracticeTest(props) {
     <div className={classes.root}>
       <CssBaseline />
       <Drawer
+        onClose={closeMenus}
         className={classes.drawer}
         variant="persistent"
         anchor="left"
@@ -208,10 +209,9 @@ export default function PracticeTest(props) {
           </ExpansionPanel>
         </List>
       </Drawer>
-      <main className={classes.content}>
+      <div className={classes.content}>
         <div className={classes.drawerHeader} />
         <Paper className={classes.root1}>
-          <button>asdfasdf</button>
           <Container fixed>
             <p style={{ color: cssVars.grey }}>Home</p>
             <Typography
@@ -247,7 +247,11 @@ export default function PracticeTest(props) {
           <br />
           <br />
           <div className={classes.imgClass}>
-            <img src={banner} style={{ width: "100%" }} alt="banner" />
+            <img
+              src={banner}
+              style={{ width: "100%", minHeight: 300 }}
+              alt="banner"
+            />
             <div className={classes.textOnImgTop}>Bank PO | Practice</div>
             <div className={classes.textOnImg}>
               <MockButton
@@ -260,20 +264,35 @@ export default function PracticeTest(props) {
                 bottomButtonStyleMockOtherActive={true}
               />
             </div>
-            <div>
-              <div className={classes.textOnImgBottomCenter}>64</div>
-              <div className={classes.textOnImgBottomCenter1}>Chapters</div>
-            </div>
-            <div>
-              <div className={classes.textOnImgBottomRight}>2682</div>
-              <div className={classes.textOnImgBottomRight1}>Questions</div>
-            </div>
-            <div>
-              <div className={classes.textOnImgBottomLeft}>7</div>
-              <div className={classes.textOnImgBottomLeft1}>Subjects</div>
+            <div
+              style={{
+                display: "flex",
+                position: "absolute",
+                top: "70%",
+                left: "50%",
+                transform: "translate(-50%, -50%)"
+              }}
+            >
+              <div style={{ padding: 20 }}>
+                <div>64</div>
+                <div>Chapters</div>
+              </div>
+              <div style={{ padding: 20 }}>
+                <div>2682</div>
+                <div>Questions</div>
+              </div>
+              <div style={{ padding: 20 }}>
+                <div>7</div>
+                <div>Subjects</div>
+              </div>
             </div>
           </div>
-          <button onClick={handleToggleDrawer}>Toggle Drawer</button>
+          <button
+            style={{ display: isDesktop ? "none" : "block", float: "right" }}
+            onClick={handleToggleDrawer}
+          >
+            Toggle Drawer
+          </button>
           <h3>Overall Progress Status</h3>
           <div style={{ flexGrow: 1 }}>
             <Grid container spacing={3}>
@@ -385,7 +404,7 @@ export default function PracticeTest(props) {
             </Grid>
           </div>
         </Container>
-      </main>
+      </div>
     </div>
   );
 }

@@ -106,22 +106,8 @@ export const useStyles = makeStyles(theme => ({
     top: "30%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    fontSize: "2vw",
+    fontSize: 24,
     fontWeight: "bold"
-  },
-  textOnImgBottomCenter: {
-    position: "absolute",
-    bottom: "20%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    fontSize: "1.2vw"
-  },
-  textOnImgBottomCenter1: {
-    position: "absolute",
-    bottom: "10%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    fontSize: "1vw"
   },
   textOnImgBottomRight: {
     position: "absolute",
