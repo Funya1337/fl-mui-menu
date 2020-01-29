@@ -411,15 +411,15 @@ export default function MockPage() {
                   bottomButtonStyleMockActive={true}
                   isTextStylesActive={true}
                 />
-                <div style={{ paddingBottom: 10 }} />
-                <ButtonMock
-                  rootStyle={{ marginLeft: 0 }}
-                  text="Submit Test"
-                  bottomButtonStyleMockOtherActive={true}
-                  isTextStylesActive={true}
-                  fullScreenButtonActive={true}
-                />
               </div>
+              <div style={{ paddingBottom: 10 }} />
+              <ButtonMock
+                rootStyle={{ marginLeft: 0 }}
+                text="Submit Test"
+                bottomButtonStyleMockOtherActive={true}
+                isTextStylesActive={true}
+                fullScreenButtonActive={true}
+              />
             </div>
           </div>
         </RightDrawer>
