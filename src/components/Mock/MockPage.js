@@ -1,183 +1,27 @@
 import React, { useState, useEffect } from "react";
 import clsx from "clsx";
 import ButtonMock from "../../components/ButtonMock/ButtonMock";
-import { makeStyles } from "@material-ui/core/styles";
+import { useTheme } from "@material-ui/core/styles";
 import cssVars from "../../constants/cssVars";
 import Avatar from "@material-ui/core/Avatar";
 import WarningIcon from "@material-ui/icons/Warning";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import avatar from "../../public/avatar.jpg";
 import RightDrawer from "../RightDrawer/RightDrawer";
+import Drawer from "@material-ui/core/Drawer";
+import Button from "@material-ui/core/Button";
+import List from "@material-ui/core/List";
+import Divider from "@material-ui/core/Divider";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import InboxIcon from "@material-ui/icons/MoveToInbox";
+import MailIcon from "@material-ui/icons/Mail";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import Card from "@material-ui/core/Card";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
-
-const rightBlockWidth = 320;
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    display: "flex",
-    flexDirection: "row",
-    backgroundColor: "white"
-  },
-  left: {
-    zIndex: 10,
-    flexGrow: 1,
-    transition: theme.transitions.create("margin", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
-    }),
-    marginRight: -rightBlockWidth
-  },
-  leftShift: {
-    transition: theme.transitions.create("margin", {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen
-    }),
-    marginRight: 0
-  },
-  right: {
-    width: rightBlockWidth,
-    flexShrink: 0
-  },
-  rightPaper: {
-    width: rightBlockWidth,
-    backgroundColor: cssVars.rightBlockColor,
-    border: "solid 2px rgba(0,0,0,0.12)"
-  },
-  leftRow1: {
-    paddingLeft: cssVars.gapM,
-    display: "flex",
-    flexDirection: "row",
-    height: 50,
-    backgroundColor: "#f9f9f9",
-    alignItems: "center",
-    boxShadow:
-      "0px 1px 2px -1px rgba(0,0,0,0.2), 0px 2px 3px 0px rgba(0,0,0,0.14), 0px 1px 2px 0px rgba(0,0,0,0.12)"
-  },
-  blueLineStyle: {
-    display: "flex",
-    flexDirection: "row",
-    height: 35,
-    backgroundColor: cssVars.lightBlue,
-    alignItems: "center"
-  },
-  leftRow4: {
-    paddingLeft: cssVars.gapM,
-    paddingRight: cssVars.gapM,
-    display: "flex",
-    flexDirection: "row",
-    height: 50,
-    backgroundColor: "#e4e4e4",
-    alignItems: "center",
-    boxShadow:
-      "0 4px 20px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
-  },
-  drawerDivAvatar: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center"
-  },
-  drawerDivMiniButtons: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center"
-  },
-  drawerDivDownButtons: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center"
-  },
-  leftRow2Flex: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center"
-  },
-  leftRow2: {
-    paddingLeft: cssVars.gapM,
-    paddingRight: cssVars.gapM,
-    marginBottom: cssVars.gapS,
-    borderBottom: "1px solid lightgrey"
-  },
-  leftRow3: {
-    paddingLeft: cssVars.gapM,
-    paddingRight: cssVars.gapM,
-    minHeight: "calc(100vh - 172px)"
-  },
-  paddingForDrawer: {
-    padding: cssVars.gapM
-  },
-  rightRow1: {},
-  rightRow2: {},
-  rightRow3: {},
-  circle: {
-    height: 20,
-    width: 20,
-    backgroundColor: "green",
-    borderRadius: "50%",
-    color: "white",
-    textAlign: "center"
-  },
-  circle1: {
-    height: 20,
-    width: 20,
-    backgroundColor: "purple",
-    borderRadius: "50%",
-    color: "white",
-    textAlign: "center"
-  },
-  circle3: {
-    height: 20,
-    width: 20,
-    backgroundColor: "red",
-    borderRadius: "50%",
-    color: "white",
-    textAlign: "center"
-  },
-  square: {
-    height: 20,
-    width: 20,
-    backgroundColor: "white",
-    color: "black",
-    textAlign: "center",
-    border: "solid 1px black"
-  },
-  levelRow: {
-    display: "flex",
-    marginBottom: 20,
-    justifyContent: "space-between",
-    "&>div": {
-      height: 23,
-      width: 39,
-      backgroundColor: "white",
-      textAlign: "center",
-      border: "solid 1px black",
-      cursor: "pointer",
-      paddingTop: 3
-    }
-  },
-  rightBlockArrow: {
-    fontSize: 30,
-    paddingTop: 4,
-    backgroundColor: cssVars.rightBlockColor,
-    border: "solid 2px rgba(0,0,0,0.12)",
-    cursor: "pointer"
-  },
-  oval: {
-    height: 20,
-    width: 44,
-    backgroundColor: "green",
-    borderRadius: "40%",
-    textAlign: "center",
-    color: "white"
-  },
-  oval2: {
-    height: 20,
-    width: 44,
-    backgroundColor: "red",
-    borderRadius: "40%",
-    textAlign: "center",
-    color: "white"
-  }
-}));
+import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
+import { useStyles } from "./style";
 
 const calculator = timerTime => {
   let mins = Math.floor(timerTime / 60);
@@ -194,16 +38,126 @@ const calculator = timerTime => {
 
 export default function MockPage() {
   const classes = useStyles();
+  const theme = useTheme();
   const [rightBlockOpened, setRightBlockOpened] = React.useState(true);
   const [timerTime, setTimerTime] = useState(0);
+  const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
   const handleDrawerToggle = () => {
     setRightBlockOpened(!rightBlockOpened);
   };
+
+  const [state, setState] = React.useState({
+    right: false
+  });
+
+  const toggleDrawer = (side, open) => event => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+
+    setState({ ...state, [side]: open });
+  };
+
+  const sideList = side => (
+    <div
+      className={classes.list}
+      role="presentation"
+      onClick={toggleDrawer(side, false)}
+      onKeyDown={toggleDrawer(side, false)}
+    >
+      <div className={classes.paddingForDrawer}>
+        <div className={classes.drawerDivAvatar}>
+          <Avatar alt="Remy Sharp" src={avatar} />
+          <div style={{ paddingLeft: 10 }}>
+            <p>durga</p>
+          </div>
+        </div>
+        <div style={{ paddingTop: 10 }} />
+        <div className={classes.drawerDivMiniButtons}>
+          <div className={classes.circle}>0</div>
+          <div style={{ fontSize: 10, paddingLeft: 5 }}>Answered</div>
+          <div style={{ paddingLeft: 10 }} />
+          <div className={classes.circle1}>0</div>
+          <div style={{ fontSize: 10, paddingLeft: 5 }}>Marked</div>
+          <div style={{ paddingLeft: 10 }} />
+          <div className={classes.square}>25</div>
+          <div style={{ fontSize: 10, paddingLeft: 5 }}>Not Visited</div>
+        </div>
+        <div style={{ paddingTop: 10 }} />
+        <div className={classes.drawerDivMiniButtons}>
+          <div className={classes.circle1}>0</div>
+          <div style={{ fontSize: 11, paddingLeft: 5 }}>
+            Marked and Answered
+          </div>
+          <div style={{ paddingLeft: 10 }} />
+          <div className={classes.circle3}>0</div>
+          <div style={{ fontSize: 11, paddingLeft: 5 }}>Not Answered</div>
+        </div>
+      </div>
+      <div style={{ paddingBottom: 30 }} />
+      <div className={classes.blueLineStyle}>
+        <strong style={{ paddingRight: 2, paddingLeft: 20 }}>SECTION</strong>
+        <strong style={{ paddingRight: 2 }}>:&nbsp;</strong>
+        <p>Test</p>
+      </div>
+      <div className={classes.paddingForDrawer}>
+        {renderTasksTableMobile()}
+        <div className={classes.drawerDivDownButtons}>
+          <ButtonMock
+            rootStyle={{
+              flexBasis: 100,
+              flexGrow: 1,
+              flexShrink: 0,
+              marginLeft: 0
+            }}
+            style={{ width: "100%" }}
+            text="Clear"
+            bottomButtonStyleMockActive={true}
+            isTextStylesActive={true}
+          />
+          <ButtonMock
+            rootStyle={{ flexBasis: 100, flexGrow: 1, flexShrink: 0 }}
+            style={{ width: "100%" }}
+            text="Instructions"
+            bottomButtonStyleMockActive={true}
+            isTextStylesActive={true}
+          />
+        </div>
+        <div style={{ paddingBottom: 10 }} />
+        <ButtonMock
+          rootStyle={{ marginLeft: 0 }}
+          text="Submit Test"
+          bottomButtonStyleMockOtherActive={true}
+          isTextStylesActive={true}
+          fullScreenButtonActive={true}
+        />
+      </div>
+    </div>
+  );
 
   const renderTasksTable = () => {
     let el = [...Array(5).keys()];
     const res = el.map((_el, index) => (
       <div className={classes.levelRow} key={index}>
+        <div style={{ borderRadius: index === 0 ? "40%" : 0 }} key={0}>
+          {1 + index * 5}
+        </div>
+        <div key={1}>{2 + index * 5}</div>
+        <div key={2}>{3 + index * 5}</div>
+        <div key={3}>{4 + index * 5}</div>
+        <div key={4}>{5 + index * 5}</div>
+      </div>
+    ));
+    return <div>{res}</div>;
+  };
+
+  const renderTasksTableMobile = () => {
+    let el = [...Array(5).keys()];
+    const res = el.map((_el, index) => (
+      <div className={classes.levelRow1} key={index}>
         <div style={{ borderRadius: index === 0 ? "40%" : 0 }} key={0}>
           {1 + index * 5}
         </div>
@@ -228,32 +182,65 @@ export default function MockPage() {
           [classes.leftShift]: rightBlockOpened
         })}
       >
-        <div className={classes.leftRow1}>
-          <div>
-            SECTIONS <span style={{ color: "lightgrey" }}>&nbsp;|</span>
-          </div>
-          <ButtonMock
-            isTextStylesActive={true}
-            isActive={true}
-            text={"General Intelligence"}
-          />
-          <ButtonMock isTextStylesActive={true} text={"General Awareness"} />
-          <ButtonMock
-            text={"Quantitative Aptitude"}
-            isTextStylesActive={true}
-          />
-          <ButtonMock
-            isTextStylesActive={true}
-            text={"English language"}
-            rootStyle={{ flexGrow: 1 }}
-          />
-          <div className={classes.rightBlockArrow} onClick={handleDrawerToggle}>
-            {rightBlockOpened ? <ArrowForwardIcon /> : <ArrowBackIcon />}
-          </div>
-        </div>
+        {isDesktop ? (
+          <Card className={classes.card}>
+            <div className={classes.headerButtonFlex}>
+              SECTIONS <span style={{ color: "lightgrey" }}>&nbsp;|</span>
+              <ButtonMock
+                isTextStylesActive={true}
+                isActive={true}
+                text={"General Intelligence"}
+              />
+              <ButtonMock
+                isTextStylesActive={true}
+                text={"General Awareness"}
+              />
+              <ButtonMock
+                text={"Quantitative Aptitude"}
+                isTextStylesActive={true}
+              />
+              <ButtonMock
+                isTextStylesActive={true}
+                text={"English language"}
+                rootStyle={{ flexGrow: 1 }}
+              />
+              {isDesktop ? (
+                <div
+                  className={classes.rightBlockArrow}
+                  onClick={handleDrawerToggle}
+                >
+                  {rightBlockOpened ? <ArrowForwardIcon /> : <ArrowBackIcon />}
+                </div>
+              ) : (
+                ""
+              )}
+            </div>
+          </Card>
+        ) : (
+          <Card className={classes.card}>
+            <div className={classes.headerButtonFlex}>
+              <ButtonMock
+                rootStyle={{ margin: 0 }}
+                isTextStylesActive={true}
+                isActive={true}
+                text={"Tes"}
+              />
+              <div style={{ flexGrow: 1 }} />
+              <select className={classes.mobileSelectStyle}>
+                <option value="0">English</option>
+                <option value="1">Hindi</option>
+              </select>
+            </div>
+          </Card>
+        )}
+
         <div className={classes.leftRow2}>
           <div className={classes.leftRow2Flex}>
-            <h4 style={{ flexGrow: 1 }}>Question No. 1</h4>
+            {isDesktop ? (
+              <h4 style={{ flexGrow: 1 }}>Question No. 1</h4>
+            ) : (
+              <h4 style={{ flexGrow: 1 }}>Que No. 1</h4>
+            )}
             <div>
               <div style={{ textAlign: "center", marginBottom: 3 }}>Marks</div>
               <div>
@@ -269,7 +256,7 @@ export default function MockPage() {
               <div style={{ paddingRight: 20 }}>{calculator(timerTime)}</div>
             </div>
             <WarningIcon />
-            <div style={{ paddingLeft: 5 }}>Report</div>
+            {isDesktop ? <div style={{ paddingLeft: 5 }}>Report</div> : ""}
           </div>
         </div>
         <div className={classes.leftRow3}>
@@ -297,109 +284,156 @@ export default function MockPage() {
               Repercussion
             </div>
           </div>
+          {/* <Button onClick={toggleDrawer("right", true)}>Open Right</Button> */}
+          {isDesktop ? (
+            ""
+          ) : (
+            <FormatListBulletedIcon
+              onClick={toggleDrawer("right", true)}
+              className={classes.rightBlockArrowMobile}
+            />
+          )}
         </div>
-        <div className={classes.leftRow4}>
-          <ButtonMock
-            rootStyle={{ marginLeft: 0 }}
-            text="Mark for Review & Next"
-            bottomButtonStyleMockActive={true}
-            isTextStylesActive={true}
-          />
-          <ButtonMock
-            text="Clear Response"
-            bottomButtonStyleMockActive={true}
-            isTextStylesActive={true}
-            rootStyle={{ flexGrow: 1 }}
-          />
-          <ButtonMock
-            text="Save & Next"
-            bottomButtonStyleMockOtherActive={true}
-            isTextStylesActive={true}
-          />
-        </div>
-      </div>
-      <RightDrawer
-        open={rightBlockOpened}
-        className={classes.right}
-        variant="persistent"
-        anchor="right"
-        classes={{ paper: classes.rightPaper }}
-      >
-        <div className={classes.paddingForDrawer}>
-          <div className={classes.drawerDivAvatar}>
-            <Avatar alt="Remy Sharp" src={avatar} />
-            <div style={{ paddingLeft: 10 }}>
-              <p>durga</p>
-            </div>
-          </div>
-          <div style={{ borderBottom: "1px solid lightgrey" }} />
-          <div style={{ paddingBottom: 15 }} />
-          <div className={classes.drawerDivMiniButtons}>
-            <div className={classes.circle}>0</div>
-            <div style={{ fontSize: 13, paddingLeft: 5 }}>Answered</div>
-            <div style={{ paddingLeft: 10 }} />
-            <div className={classes.circle1}>0</div>
-            <div style={{ fontSize: 13, paddingLeft: 5 }}>Marked</div>
-            <div style={{ paddingLeft: 10 }} />
-            <div className={classes.square}>25</div>
-            <div style={{ fontSize: 12, paddingLeft: 5 }}>Not Visited</div>
-          </div>
-          <div style={{ paddingBottom: 5 }} />
-          <div className={classes.drawerDivMiniButtons}>
-            <div className={classes.circle1}>0</div>
-            <div style={{ fontSize: 12, paddingLeft: 5 }}>
-              Marked and Answered
-            </div>
-            <div style={{ paddingLeft: 10 }} />
-            <div className={classes.circle3}>0</div>
-            <div style={{ fontSize: 12, paddingLeft: 5 }}>Not Answered</div>
-          </div>
-          <div style={{ paddingBottom: 15 }} />
-          <div style={{ borderBottom: "1px solid lightgrey" }} />
-        </div>
-        <div style={{ paddingBottom: 30 }} />
-        <div className={classes.blueLineStyle}>
-          <strong style={{ paddingRight: 2, paddingLeft: 20 }}>SECTION</strong>
-          <strong style={{ paddingRight: 2 }}>:&nbsp;</strong>
-          <p>General Intelligence</p>
-        </div>
-        <div className={classes.paddingForDrawer}>
-          {renderTasksTable()}
-          <div style={{ paddingTop: 80 }}>
-            <div style={{ borderBottom: "1px solid lightgrey" }} />
-            <br />
-            <div className={classes.drawerDivDownButtons}>
+        <Card className={classes.mockPageFooter}>
+          {isDesktop ? (
+            <div className={classes.footerFixer}>
               <ButtonMock
-                rootStyle={{
-                  flexBasis: 100,
-                  flexGrow: 1,
-                  flexShrink: 0,
-                  marginLeft: 0
-                }}
-                style={{ width: "100%" }}
+                rootStyle={{ marginLeft: 0 }}
+                text="Mark for Review & Next"
+                bottomButtonStyleMockActive={true}
+                isTextStylesActive={true}
+              />
+              <ButtonMock
                 text="Clear Response"
                 bottomButtonStyleMockActive={true}
                 isTextStylesActive={true}
+                rootStyle={{ float: "right" }}
               />
               <ButtonMock
-                rootStyle={{ flexBasis: 100, flexGrow: 1, flexShrink: 0 }}
-                style={{ width: "100%" }}
-                text="Instructions"
-                bottomButtonStyleMockActive={true}
+                text="Save & Next"
+                bottomButtonStyleMockOtherActive={true}
                 isTextStylesActive={true}
               />
             </div>
-            <div style={{ paddingBottom: 10 }} />
-            <ButtonMock
-              rootStyle={{ marginLeft: 0 }}
-              text="Submit Test"
-              bottomButtonStyleMockOtherActive={true}
-              isTextStylesActive={true}
-              fullScreenButtonActive={true}
-            />
+          ) : (
+            <div className={classes.footerFixer}>
+              <ButtonMock
+                rootStyle={{ marginLeft: 0 }}
+                text="Mark for Review"
+                bottomButtonStyleMockActive={true}
+                isTextStylesActive={true}
+              />
+              <ButtonMock
+                text="Clear"
+                bottomButtonStyleMockActive={true}
+                isTextStylesActive={true}
+                rootStyle={{ flexGrow: 1 }}
+              />
+              <ButtonMock
+                text="Save & Next"
+                bottomButtonStyleMockOtherActive={true}
+                isTextStylesActive={true}
+              />
+            </div>
+          )}
+        </Card>
+      </div>
+      {isDesktop ? (
+        <RightDrawer
+          open={rightBlockOpened}
+          className={classes.right}
+          variant="persistent"
+          anchor="right"
+          classes={{ paper: classes.rightPaper }}
+        >
+          <div className={classes.paddingForDrawer}>
+            <div className={classes.drawerDivAvatar}>
+              <Avatar alt="Remy Sharp" src={avatar} />
+              <div style={{ paddingLeft: 10 }}>
+                <p>durga</p>
+              </div>
+            </div>
+            <div style={{ borderBottom: "1px solid lightgrey" }} />
+            <div style={{ paddingBottom: 15 }} />
+            <div className={classes.drawerDivMiniButtons}>
+              <div className={classes.circle}>0</div>
+              <div style={{ fontSize: 13, paddingLeft: 5 }}>Answered</div>
+              <div style={{ paddingLeft: 10 }} />
+              <div className={classes.circle1}>0</div>
+              <div style={{ fontSize: 13, paddingLeft: 5 }}>Marked</div>
+              <div style={{ paddingLeft: 10 }} />
+              <div className={classes.square}>25</div>
+              <div style={{ fontSize: 12, paddingLeft: 5 }}>Not Visited</div>
+            </div>
+            <div style={{ paddingBottom: 5 }} />
+            <div className={classes.drawerDivMiniButtons}>
+              <div className={classes.circle1}>0</div>
+              <div style={{ fontSize: 12, paddingLeft: 5 }}>
+                Marked and Answered
+              </div>
+              <div style={{ paddingLeft: 10 }} />
+              <div className={classes.circle3}>0</div>
+              <div style={{ fontSize: 12, paddingLeft: 5 }}>Not Answered</div>
+            </div>
+            <div style={{ paddingBottom: 15 }} />
+            <div style={{ borderBottom: "1px solid lightgrey" }} />
           </div>
-        </div>
-      </RightDrawer>
+          <div style={{ paddingBottom: 30 }} />
+          <div className={classes.blueLineStyle}>
+            <strong style={{ paddingRight: 2, paddingLeft: 20 }}>
+              SECTION
+            </strong>
+            <strong style={{ paddingRight: 2 }}>:&nbsp;</strong>
+            <p>General Intelligence</p>
+          </div>
+          <div className={classes.paddingForDrawer}>
+            {renderTasksTable()}
+            <div style={{ paddingTop: 80 }}>
+              <div style={{ borderBottom: "1px solid lightgrey" }} />
+              <br />
+              <div className={classes.drawerDivDownButtons}>
+                <ButtonMock
+                  rootStyle={{
+                    flexBasis: 100,
+                    flexGrow: 1,
+                    flexShrink: 0,
+                    marginLeft: 0
+                  }}
+                  style={{ width: "100%" }}
+                  text="Clear Response"
+                  bottomButtonStyleMockActive={true}
+                  isTextStylesActive={true}
+                />
+                <ButtonMock
+                  rootStyle={{ flexBasis: 100, flexGrow: 1, flexShrink: 0 }}
+                  style={{ width: "100%" }}
+                  text="Instructions"
+                  bottomButtonStyleMockActive={true}
+                  isTextStylesActive={true}
+                />
+                <div style={{ paddingBottom: 10 }} />
+                <ButtonMock
+                  rootStyle={{ marginLeft: 0 }}
+                  text="Submit Test"
+                  bottomButtonStyleMockOtherActive={true}
+                  isTextStylesActive={true}
+                  fullScreenButtonActive={true}
+                />
+              </div>
+            </div>
+          </div>
+        </RightDrawer>
+      ) : (
+        <Drawer
+          anchor="right"
+          style={{ backgroundColor: "whi" }}
+          open={state.right}
+          classes={{ paper: classes.paperDrawer }}
+          onClose={toggleDrawer("right", false)}
+        >
+          {sideList("right")}
+        </Drawer>
+      )}
     </div>
   );
 }
