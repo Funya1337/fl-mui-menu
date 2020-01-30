@@ -2,7 +2,6 @@ import React from "react";
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import purple from "@material-ui/core/colors/green";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer";
 import MockPage from "./components/Mock/MockPage";

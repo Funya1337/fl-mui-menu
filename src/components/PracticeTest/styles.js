@@ -18,6 +18,19 @@ export const useStyles = makeStyles(theme => ({
       width: "auto"
     }
   },
+  drawerArrowButton: {
+    paddingTop: 8,
+    paddingBottom: 6,
+    paddingLeft: 3,
+    marginTop: 6,
+    marginBottom: 6,
+    border: "solid 2px rgba(0,0,0,0.12)",
+    cursor: "pointer",
+    position: "fixed",
+    width: 36,
+    backgroundColor: "white",
+    zIndex: 1
+  },
   searchIcon: {
     width: theme.spacing(7),
     height: "100%",
@@ -36,8 +49,7 @@ export const useStyles = makeStyles(theme => ({
     transition: theme.transitions.create("width"),
     width: "100%",
     border: "2px solid",
-    cursor: "pointer",
-    transition: "0.2s"
+    cursor: "pointer"
   },
   root: {
     display: "flex"

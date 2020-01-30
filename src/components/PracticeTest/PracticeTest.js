@@ -16,23 +16,11 @@ import { Container } from "@material-ui/core";
 import banner from "../../public/banner.jpg";
 import Grid from "@material-ui/core/Grid";
 import MockButton from "../../components/ButtonMock/ButtonMock";
-import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
-import CardMedia from "@material-ui/core/CardMedia";
-import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
-import Collapse from "@material-ui/core/Collapse";
-import Avatar from "@material-ui/core/Avatar";
-import { red } from "@material-ui/core/colors";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import ShareIcon from "@material-ui/icons/Share";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import folderIcon from "../../public/folder.svg";
 import ReceiptIcon from "@material-ui/icons/Receipt";
 import TrackChangesIcon from "@material-ui/icons/TrackChanges";
-import FindInPageIcon from "@material-ui/icons/FindInPage";
 import SpeedIcon from "@material-ui/icons/Speed";
 import { MENU_STATE } from "../../constants/menuState";
 import { useTheme } from "@material-ui/core/styles";
@@ -211,24 +199,19 @@ export default function PracticeTest(props) {
       </Drawer>
       <div className={classes.content}>
         <div className={classes.drawerHeader} />
-        <div
-          style={{
-            marginLeft: isMenuOpened ? 239 : 0,
-            paddingTop: 8,
-            paddingBottom: 6,
-            paddingLeft: 3,
-            marginTop: 6,
-            marginBottom: 6,
-            border: "solid 2px rgba(0,0,0,0.12)",
-            cursor: "pointer",
-            width: 36
-          }}
-          onClick={handleToggleDrawer}
-        >
-          <div style={{ display: isDesktop ? "none" : "block" }}>
-            {isMenuOpened ? <ArrowBackIcon /> : <ArrowForwardIcon />}
+        {isDesktop ? (
+          ""
+        ) : (
+          <div
+            style={{
+              marginLeft: isMenuOpened ? 239 : 0
+            }}
+            className={classes.drawerArrowButton}
+            onClick={handleToggleDrawer}
+          >
+            <div>{isMenuOpened ? <ArrowBackIcon /> : <ArrowForwardIcon />}</div>
           </div>
-        </div>
+        )}
         <Paper className={classes.root1}>
           <Container fixed>
             <p style={{ color: cssVars.grey }}>Home</p>
@@ -249,13 +232,13 @@ export default function PracticeTest(props) {
           <Divider />
           <br />
           <Container fixed>
-            <a href="#" className={classes.paperCustomButton}>
+            <a href="/practicetest" className={classes.paperCustomButton}>
               Home
             </a>
-            <a href="#" className={classes.paperCustomButton}>
+            <a href="/practicetest" className={classes.paperCustomButton}>
               Analysis
             </a>
-            <a href="#" className={classes.paperCustomButton}>
+            <a href="/practicetest" className={classes.paperCustomButton}>
               Saved Questions
             </a>
             <Typography component="p"></Typography>
